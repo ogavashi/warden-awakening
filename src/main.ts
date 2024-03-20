@@ -6,10 +6,7 @@ import engine from "./kaboomContext";
 
 const DEFAULT_SCENE = "world";
 
-engine.loadSprite(config.assetsName, config.assetsPath, {
-  sliceX: config.sliceX,
-  sliceY: config.sliceY,
-});
+engine.loadSprite(config.assetsName, config.assetsPath, config.assetsOptions);
 
 for (const sceneName in scenes) {
   if (Object.hasOwnProperty.call(scenes, sceneName)) {

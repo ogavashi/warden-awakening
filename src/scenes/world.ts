@@ -27,6 +27,8 @@ const world = async (engine: KaboomCtx) => {
 
     drawTiles(engine, map, layer, tileheight, tilewidth);
   }
+
+  engine.camScale(engine.vec2(1.5));
 };
 
 export default world;
