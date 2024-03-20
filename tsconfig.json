@@ -29,7 +29,9 @@
       "@types": ["src/types"],
       "@ui": ["src/ui"],
       "@constants": ["src/constants"],
-      "@features": ["src/features"]
+      "@features": ["src/features"],
+      "@utils": ["src/utils"],
+      "@common": ["src/common"]
     },
 
     "types": ["node"]

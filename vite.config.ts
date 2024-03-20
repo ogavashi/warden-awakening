@@ -15,6 +15,8 @@ export default defineConfig({
       "@ui": resolve(__dirname, "./src/ui"),
       "@constants": resolve(__dirname, "./src/constants"),
       "@features": resolve(__dirname, "./src/features"),
+      "@utils": resolve(__dirname, "./src/utils"),
+      "@common": resolve(__dirname, "./src/common"),
     },
   },
 });
