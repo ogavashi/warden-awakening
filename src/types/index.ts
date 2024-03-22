@@ -1,4 +1,4 @@
-import { KaboomCtx } from "kaboom";
+import { AreaComp, BodyComp, GameObj, KaboomCtx, OpacityComp, PosComp, SpriteComp } from "kaboom";
 
 export interface Scenes {
   [key: string]: (engine: KaboomCtx) => Promise<void>;
@@ -9,6 +9,11 @@ export enum Directions {
   RIGHT = "right",
   DOWN = "down",
   LEFT = "left",
+}
+
+export interface Entities {
+  player: null | GameObj<SpriteComp | AreaComp | BodyComp | PosComp | OpacityComp>;
+  slimes: [];
 }
 
 export interface Map {

@@ -1,4 +1,4 @@
-import { animationKeys } from "./animationKeys";
+import { anims } from "./anims";
 
 export const config = {
   assetsName: "assets",
@@ -8,8 +8,6 @@ export const config = {
   assetsOptions: {
     sliceX: 39,
     sliceY: 31,
-    anim: {
-      [animationKeys.playerIdleDown]: 936,
-    },
+    anims,
   },
 };

@@ -3,6 +3,7 @@ export const LAYERS = {
   spawnPoints: "SpawnPoints",
 };
 
-export const TEST = {
-  boundaries: "Boundaries",
+export const LAYER_OBJECTS = {
+  player: "player",
+  slime: "slime",
 };
