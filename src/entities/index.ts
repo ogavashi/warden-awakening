@@ -1,2 +1,2 @@
-export { generatePlayer } from "./Player";
+export { generatePlayer, setPlayerInstance } from "./Player";
 export { generateSlime } from "./Slime";

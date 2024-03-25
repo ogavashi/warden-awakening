@@ -1,3 +1,4 @@
+import { tags } from "@common";
 import { AreaComp, BodyComp, GameObj, KaboomCtx, OpacityComp, PosComp, SpriteComp } from "kaboom";
 
 export interface Scenes {
@@ -11,10 +12,21 @@ export enum Directions {
   LEFT = "left",
 }
 
+export type GameObject = GameObj<SpriteComp | AreaComp | BodyComp | PosComp | OpacityComp>;
+
+export type PlayerInstance = GameObject & {
+  speed: number;
+  attackPower: number;
+  direction: Directions;
+  isAttacking: boolean;
+};
+
 export interface Entities {
-  player: null | GameObj<SpriteComp | AreaComp | BodyComp | PosComp | OpacityComp>;
+  player: GameObject | null;
   slimes: [];
 }
+
+export type Tag = keyof typeof tags;
 
 export interface Map {
   compressionlevel: number;

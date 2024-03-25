@@ -1,7 +1,7 @@
 import { LAYERS, LAYER_OBJECTS, config } from "@common";
-import { generatePlayer, generateSlime } from "@entities";
-import { Entities } from "@types";
-import { colorizeBackground, drawTiles, fetchMapData } from "@utils";
+import { generatePlayer, generateSlime, setPlayerInstance } from "@entities";
+import { Entities, PlayerInstance } from "@types";
+import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData } from "@utils";
 import { KaboomCtx } from "kaboom";
 
 const world = async (engine: KaboomCtx) => {
@@ -19,7 +19,8 @@ const world = async (engine: KaboomCtx) => {
 
   for (const layer of layers) {
     if (layer.name === LAYERS.boundaries) {
-      console.log("121212");
+      drawBoundaries(engine, map, layer);
+
       continue;
     }
 
@@ -44,8 +45,27 @@ const world = async (engine: KaboomCtx) => {
     drawTiles(engine, map, layer, tileheight, tilewidth);
   }
 
+  if (!entities.player) {
+    return;
+  }
+
   engine.camScale(engine.vec2(4));
-  engine.camPos(entities.player?.worldPos() ?? engine.vec2());
+  engine.camPos(entities.player.worldPos());
+  engine.onUpdate(async () => {
+    if (entities.player?.pos.dist(engine.camPos())) {
+      await engine.tween(
+        engine.camPos(),
+        entities.player.worldPos(),
+        0.15,
+        (newPos) => {
+          engine.camPos(newPos);
+        },
+        engine.easings.linear
+      );
+    }
+  });
+
+  setPlayerInstance(engine, entities.player as PlayerInstance);
 };
 
 export default world;

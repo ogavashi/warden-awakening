@@ -3,7 +3,7 @@ import { KaboomCtx, Vec2 } from "kaboom";
 
 export const generateSlime = (engine: KaboomCtx, pos: Vec2) => {
   return [
-    engine.sprite(config.assetsName, { anim: animationKeys.slimeIdleDown }),
+    engine.sprite(config.assetsName, { anim: animationKeys.slime.idleDown }),
     engine.area({ shape: new engine.Rect(engine.vec2(0, 6), 16, 10) }),
     engine.body(),
     engine.pos(pos),
