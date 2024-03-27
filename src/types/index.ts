@@ -1,5 +1,14 @@
 import { tags } from "@common";
-import { AreaComp, BodyComp, GameObj, KaboomCtx, OpacityComp, PosComp, SpriteComp } from "kaboom";
+import {
+  AreaComp,
+  BodyComp,
+  GameObj,
+  KaboomCtx,
+  OpacityComp,
+  PosComp,
+  SpriteComp,
+  StateComp,
+} from "kaboom";
 
 export interface Scenes {
   [key: string]: (engine: KaboomCtx) => Promise<void>;
@@ -14,16 +23,25 @@ export enum Directions {
 
 export type GameObject = GameObj<SpriteComp | AreaComp | BodyComp | PosComp | OpacityComp>;
 
-export type PlayerInstance = GameObject & {
-  speed: number;
-  attackPower: number;
-  direction: Directions;
-  isAttacking: boolean;
-};
+export type PlayerInstance = GameObject &
+  StateComp & {
+    speed: number;
+    attackPower: number;
+    direction: Directions;
+    isAttacking: boolean;
+  };
+
+export type SlimeInstance = GameObject &
+  StateComp & {
+    speed: number;
+    attackPower: number;
+  };
+
+export type GameInstance = PlayerInstance | SlimeInstance;
 
 export interface Entities {
   player: GameObject | null;
-  slimes: [];
+  slimes: GameObject[];
 }
 
 export type Tag = keyof typeof tags;

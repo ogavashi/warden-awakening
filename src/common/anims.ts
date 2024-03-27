@@ -1,13 +1,13 @@
 import { animationKeys } from "./animationKeys";
 
 export const anims = {
+  // Player
   [animationKeys.player.idle.down]: 944,
   [animationKeys.player.down]: {
     from: 944,
     to: 947,
     loop: true,
   },
-  [animationKeys.slime.idleDown]: 858,
   [animationKeys.player.idle.side]: 984,
   [animationKeys.player.side]: {
     from: 984,
@@ -24,4 +24,11 @@ export const anims = {
   [animationKeys.player.attack.down]: 1100,
   [animationKeys.player.attack.left]: 1101,
   [animationKeys.player.attack.down]: 1102,
+  //Slimes
+  [animationKeys.slime.idle.down]: 858,
+  [animationKeys.slime.down]: { from: 858, to: 859, loop: true },
+  [animationKeys.slime.idle.side]: 860,
+  [animationKeys.slime.side]: { from: 860, to: 861, loop: true },
+  [animationKeys.slime.idle.up]: 897,
+  [animationKeys.slime.up]: { from: 897, to: 898, loop: true },
 };

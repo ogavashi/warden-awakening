@@ -22,7 +22,7 @@ export const generatePlayer = (engine: KaboomCtx, pos: Vec2) => {
 
 export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => {
   engine.onKeyDown((key) => {
-    if (["left", "a"].includes(key) && !multiKeysDown(engine, ["up", "down", "w", "s"])) {
+    if (["left", "a", "ф"].includes(key) && !multiKeysDown(engine, ["up", "down", "w", "s"])) {
       player.flipX = true;
       playAnimIfNotPlaying(player, animationKeys.player.side);
       player.move(-player.speed, 0);
@@ -31,7 +31,7 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
       return;
     }
 
-    if (["right", "d"].includes(key) && !multiKeysDown(engine, ["up", "down", "w", "s"])) {
+    if (["right", "d", "в"].includes(key) && !multiKeysDown(engine, ["up", "down", "w", "s"])) {
       player.flipX = false;
       playAnimIfNotPlaying(player, animationKeys.player.side);
       player.move(player.speed, 0);
@@ -40,7 +40,7 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
       return;
     }
 
-    if (["up", "w"].includes(key)) {
+    if (["up", "w", "ц"].includes(key)) {
       playAnimIfNotPlaying(player, animationKeys.player.up);
       player.move(0, -player.speed);
       player.direction = Directions.UP;
@@ -48,7 +48,7 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
       return;
     }
 
-    if (["down", "s"].includes(key)) {
+    if (["down", "s", "і"].includes(key)) {
       playAnimIfNotPlaying(player, animationKeys.player.down);
       player.move(0, player.speed);
       player.direction = Directions.DOWN;

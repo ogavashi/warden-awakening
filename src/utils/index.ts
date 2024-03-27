@@ -4,3 +4,4 @@ export { drawTiles } from "./drawTiles";
 export { drawBoundaries } from "./drawBoundaries";
 export { playAnimIfNotPlaying } from "./playAnimIfNotPlaying";
 export { multiKeysDown } from "./multiKeysDown";
+export { setInstanceMovement } from "./setInstanceMovement";

@@ -16,6 +16,13 @@ export const animationKeys = {
     },
   },
   slime: {
-    idleDown: "slime-idle-down",
+    idle: {
+      down: "slime-idle-down",
+      side: "slime-idle-side",
+      up: "slime-idle-up",
+    },
+    down: "slime-down",
+    side: "slime-side",
+    up: "slime-up",
   },
 };

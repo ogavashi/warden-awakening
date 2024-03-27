@@ -1,2 +1,2 @@
 export { generatePlayer, setPlayerInstance } from "./Player";
-export { generateSlime } from "./Slime";
+export { generateSlime, setSlimeAI } from "./Slime";

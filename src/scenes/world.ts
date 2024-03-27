@@ -1,6 +1,6 @@
 import { LAYERS, LAYER_OBJECTS, config } from "@common";
-import { generatePlayer, generateSlime, setPlayerInstance } from "@entities";
-import { Entities, PlayerInstance } from "@types";
+import { generatePlayer, generateSlime, setPlayerInstance, setSlimeAI } from "@entities";
+import { Entities, PlayerInstance, SlimeInstance } from "@types";
 import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData } from "@utils";
 import { KaboomCtx } from "kaboom";
 
@@ -33,7 +33,7 @@ const world = async (engine: KaboomCtx) => {
         }
 
         if (object.name === LAYER_OBJECTS.slime) {
-          entities.player = map.add(generateSlime(engine, engine.vec2(object.x, object.y)));
+          entities.slimes.push(map.add(generateSlime(engine, engine.vec2(object.x, object.y))));
 
           continue;
         }
@@ -66,6 +66,14 @@ const world = async (engine: KaboomCtx) => {
   });
 
   setPlayerInstance(engine, entities.player as PlayerInstance);
+
+  if (!entities.slimes.length) {
+    return;
+  }
+
+  for (const slime of entities.slimes) {
+    setSlimeAI(engine, slime as SlimeInstance);
+  }
 };
 
 export default world;
