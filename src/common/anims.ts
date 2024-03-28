@@ -31,4 +31,8 @@ export const anims = {
   [animationKeys.slime.side]: { from: 860, to: 861, loop: true },
   [animationKeys.slime.idle.up]: 897,
   [animationKeys.slime.up]: { from: 897, to: 898, loop: true },
+  //Oldman
+  [animationKeys.oldman.down]: 866,
+  [animationKeys.oldman.side]: 907,
+  [animationKeys.oldman.up]: 905,
 };

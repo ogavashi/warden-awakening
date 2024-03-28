@@ -35,13 +35,23 @@ export type SlimeInstance = GameObject &
   StateComp & {
     speed: number;
     attackPower: number;
+    prevX: number;
+    prevY: number;
+    counter: number;
   };
+
+export type OldmanInstance = GameObject & StateComp;
 
 export type GameInstance = PlayerInstance | SlimeInstance;
 
-export interface Entities {
+export interface WorldEntities {
   player: GameObject | null;
   slimes: GameObject[];
+}
+
+export interface HouseEntities {
+  oldMan: GameObject | null;
+  player: GameObject | null;
 }
 
 export type Tag = keyof typeof tags;

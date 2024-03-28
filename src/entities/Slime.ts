@@ -20,15 +20,34 @@ export const generateSlime = (engine: KaboomCtx, pos: Vec2) => {
     engine.opacity(),
     engine.state(INTSANCE_STATES.idle, [INTSANCE_STATES.idle, ...DIRECTIONAL_STATES]),
     {
-      speed: 50,
+      speed: 20,
       attackPower: 0.5,
+      prevX: pos.x,
+      prevY: pos.y,
+      counter: 0,
     },
     tags.slime,
   ];
 };
 
 export const setSlimeAI = (engine: KaboomCtx, slime: SlimeInstance) => {
-  engine.onUpdate(() => setInstanceMovement(slime));
+  engine.onUpdate(() => {
+    const { x, y } = slime.worldPos();
+    if (
+      slime.state !== INTSANCE_STATES.idle &&
+      slime.prevX === x &&
+      slime.prevY === y &&
+      slime.counter > 120
+    ) {
+      slime.enterState(DIRECTIONAL_STATES[Math.floor(Math.random() * DIRECTIONAL_STATES.length)]);
+      slime.counter = 0;
+    }
+    slime.prevX = x;
+    slime.prevY = y;
+    slime.counter++;
+
+    setInstanceMovement(slime);
+  });
 
   const idle = slime.onStateEnter(INTSANCE_STATES.idle, async () => {
     slime.stop();
@@ -42,7 +61,7 @@ export const setSlimeAI = (engine: KaboomCtx, slime: SlimeInstance) => {
     slime.flipX = true;
     playAnimIfNotPlaying(slime, animationKeys.slime.side);
 
-    await engine.wait(3);
+    await engine.wait(4);
 
     slime.enterState(INTSANCE_STATES.idle);
   });
@@ -50,21 +69,21 @@ export const setSlimeAI = (engine: KaboomCtx, slime: SlimeInstance) => {
     slime.flipX = false;
     playAnimIfNotPlaying(slime, animationKeys.slime.side);
 
-    await engine.wait(3);
+    await engine.wait(4);
 
     slime.enterState(INTSANCE_STATES.idle);
   });
   const up = slime.onStateEnter(INTSANCE_STATES.up, async () => {
     playAnimIfNotPlaying(slime, animationKeys.slime.up);
 
-    await engine.wait(3);
+    await engine.wait(4);
 
     slime.enterState(INTSANCE_STATES.idle);
   });
   const down = slime.onStateEnter(INTSANCE_STATES.down, async () => {
     playAnimIfNotPlaying(slime, animationKeys.slime.down);
 
-    await engine.wait(3);
+    await engine.wait(4);
 
     slime.enterState(INTSANCE_STATES.idle);
   });

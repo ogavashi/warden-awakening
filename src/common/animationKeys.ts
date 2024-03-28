@@ -25,4 +25,9 @@ export const animationKeys = {
     side: "slime-side",
     up: "slime-up",
   },
+  oldman: {
+    down: "oldman-down",
+    side: "oldman-side",
+    up: "oldman-up",
+  },
 };
