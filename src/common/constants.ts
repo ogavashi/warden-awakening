@@ -7,6 +7,7 @@ export const LAYER_OBJECTS = {
   player: "player",
   slime: "slime",
   oldman: "oldman",
+  trader: "trader",
 };
 
 export const INTSANCE_STATES = {
@@ -20,4 +21,5 @@ export const INTSANCE_STATES = {
 export const SCENE_KEYS = {
   world: "world",
   house: "house",
+  shop: "shop",
 };

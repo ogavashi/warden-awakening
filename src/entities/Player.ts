@@ -1,7 +1,7 @@
 import { animationKeys, config, tags } from "@common";
 import { Directions, PlayerInstance } from "@types";
 import { multiKeysDown, playAnimIfNotPlaying } from "@utils";
-import { KaboomCtx, Vec2 } from "kaboom";
+import { KaboomCtx, Key, Vec2 } from "kaboom";
 
 export const generatePlayer = (engine: KaboomCtx, pos: Vec2) => {
   return [
@@ -20,41 +20,165 @@ export const generatePlayer = (engine: KaboomCtx, pos: Vec2) => {
   ];
 };
 
+const movePlayer = (
+  engine: KaboomCtx,
+  player: PlayerInstance,
+  currentKey: Key,
+  expectedKey: Key,
+  excludedKeys: Key[],
+  direction: Directions,
+  moveVec: Vec2
+) => {
+  if (currentKey === expectedKey && !multiKeysDown(engine, excludedKeys)) {
+    switch (direction) {
+      case Directions.LEFT:
+        player.flipX = true;
+        playAnimIfNotPlaying(player, animationKeys.player.side);
+        break;
+      case Directions.RIGHT:
+        player.flipX = false;
+        playAnimIfNotPlaying(player, animationKeys.player.side);
+        break;
+      case Directions.UP:
+        playAnimIfNotPlaying(player, animationKeys.player.up);
+        break;
+      case Directions.DOWN:
+        playAnimIfNotPlaying(player, animationKeys.player.down);
+        break;
+      default:
+        break;
+    }
+
+    player.move(moveVec);
+    player.direction = direction;
+  }
+};
+
 export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => {
   engine.onKeyDown((key) => {
-    if (["left", "a", "ф"].includes(key) && !multiKeysDown(engine, ["up", "down", "w", "s"])) {
-      player.flipX = true;
-      playAnimIfNotPlaying(player, animationKeys.player.side);
-      player.move(-player.speed, 0);
-      player.direction = Directions.LEFT;
+    //Left movement
+    movePlayer(
+      engine,
+      player,
+      key,
+      "left",
+      ["up", "down", "w", "s", "ц" as Key, "і" as Key, "ф" as Key, "a"],
+      Directions.LEFT,
+      engine.vec2(-player.speed, 0)
+    );
 
-      return;
-    }
+    movePlayer(
+      engine,
+      player,
+      key,
+      "a",
+      ["up", "down", "w", "s", "ц" as Key, "і" as Key, "left"],
+      Directions.LEFT,
+      engine.vec2(-player.speed, 0)
+    );
 
-    if (["right", "d", "в"].includes(key) && !multiKeysDown(engine, ["up", "down", "w", "s"])) {
-      player.flipX = false;
-      playAnimIfNotPlaying(player, animationKeys.player.side);
-      player.move(player.speed, 0);
-      player.direction = Directions.RIGHT;
+    movePlayer(
+      engine,
+      player,
+      key,
+      "ф" as Key,
+      ["up", "down", "w", "s", "ц" as Key, "і" as Key, "left"],
+      Directions.LEFT,
+      engine.vec2(-player.speed, 0)
+    );
 
-      return;
-    }
+    //Right movement
+    movePlayer(
+      engine,
+      player,
+      key,
+      "d",
+      ["up", "down", "w", "s", "ц" as Key, "і" as Key, "right"],
+      Directions.RIGHT,
+      engine.vec2(player.speed, 0)
+    );
 
-    if (["up", "w", "ц"].includes(key)) {
-      playAnimIfNotPlaying(player, animationKeys.player.up);
-      player.move(0, -player.speed);
-      player.direction = Directions.UP;
+    movePlayer(
+      engine,
+      player,
+      key,
+      "в" as Key,
+      ["up", "down", "w", "s", "ц" as Key, "і" as Key, "right"],
+      Directions.RIGHT,
+      engine.vec2(player.speed, 0)
+    );
 
-      return;
-    }
+    movePlayer(
+      engine,
+      player,
+      key,
+      "right",
+      ["up", "down", "w", "s", "ц" as Key, "і" as Key, "в" as Key, "d"],
+      Directions.RIGHT,
+      engine.vec2(player.speed, 0)
+    );
 
-    if (["down", "s", "і"].includes(key)) {
-      playAnimIfNotPlaying(player, animationKeys.player.down);
-      player.move(0, player.speed);
-      player.direction = Directions.DOWN;
+    //Up movement
+    movePlayer(
+      engine,
+      player,
+      key,
+      "up",
+      ["w", "ц" as Key],
+      Directions.UP,
+      engine.vec2(0, -player.speed)
+    );
 
-      return;
-    }
+    movePlayer(
+      engine,
+      player,
+      key,
+      "ц" as Key,
+      ["up"],
+      Directions.UP,
+      engine.vec2(0, -player.speed)
+    );
+
+    movePlayer(
+      engine,
+      player,
+      key,
+      "w" as Key,
+      ["up"],
+      Directions.UP,
+      engine.vec2(0, -player.speed)
+    );
+
+    //Down movement
+    movePlayer(
+      engine,
+      player,
+      key,
+      "down",
+      ["s", "і" as Key],
+      Directions.DOWN,
+      engine.vec2(0, player.speed)
+    );
+
+    movePlayer(
+      engine,
+      player,
+      key,
+      "і" as Key,
+      ["down"],
+      Directions.DOWN,
+      engine.vec2(0, player.speed)
+    );
+
+    movePlayer(
+      engine,
+      player,
+      key,
+      "s" as Key,
+      ["down"],
+      Directions.DOWN,
+      engine.vec2(0, player.speed)
+    );
   });
 
   engine.onKeyRelease(() => {

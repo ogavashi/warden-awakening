@@ -42,6 +42,8 @@ export type SlimeInstance = GameObject &
 
 export type OldmanInstance = GameObject & StateComp;
 
+export type TraderInstance = GameObject & StateComp;
+
 export type GameInstance = PlayerInstance | SlimeInstance;
 
 export interface WorldEntities {
@@ -51,6 +53,11 @@ export interface WorldEntities {
 
 export interface HouseEntities {
   oldMan: GameObject | null;
+  player: GameObject | null;
+}
+
+export interface ShopEntities {
+  trader: GameObject | null;
   player: GameObject | null;
 }
 

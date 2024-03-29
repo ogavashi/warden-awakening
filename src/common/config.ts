@@ -5,6 +5,9 @@ export const config = {
   assetsPath: "./assets/topdownasset.png",
   worldMapPath: "./assets/maps/world.json",
   houseMapPath: "./assets/maps/house.json",
+  shopMapPath: "./assets/maps/shop.json",
+
+  soundVolume: 0.1,
 
   assetsOptions: {
     sliceX: 39,

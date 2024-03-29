@@ -1,4 +1,4 @@
-import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, config, tags } from "@common";
+import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, config, sounds, tags } from "@common";
 import { generatePlayer, generateSlime, setPlayerInstance, setSlimeAI } from "@entities";
 import { PlayerInstance, SlimeInstance, WorldEntities } from "@types";
 import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData } from "@utils";
@@ -9,6 +9,11 @@ const world = async (engine: KaboomCtx) => {
   const mapData = await fetchMapData(config.worldMapPath);
 
   const map = engine.add([engine.pos(0, 0)]);
+
+  const backgroundMusic = engine.play(sounds.world.background.name, {
+    loop: true,
+    volume: config.soundVolume,
+  });
 
   const entities: WorldEntities = {
     player: null,
@@ -76,7 +81,13 @@ const world = async (engine: KaboomCtx) => {
   }
 
   entities.player.onCollide(tags.doorEntrance, () => {
+    backgroundMusic.stop();
     engine.go(SCENE_KEYS.house);
+  });
+
+  entities.player.onCollide(tags.shopEntrance, () => {
+    backgroundMusic.stop();
+    engine.go(SCENE_KEYS.shop);
   });
 };
 

@@ -35,4 +35,8 @@ export const anims = {
   [animationKeys.oldman.down]: 866,
   [animationKeys.oldman.side]: 907,
   [animationKeys.oldman.up]: 905,
+  //Trader
+  [animationKeys.trader.down]: 788,
+  [animationKeys.trader.side]: 829,
+  [animationKeys.trader.up]: 827,
 };

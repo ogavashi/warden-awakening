@@ -1,5 +1,7 @@
 import { animationKeys, config, tags } from "@common";
+import { oldmanLines } from "@content";
 import { Directions, OldmanInstance, PlayerInstance } from "@types";
+import { dialog } from "@ui";
 import { playAnimIfNotPlaying } from "@utils";
 import { KaboomCtx, Vec2 } from "kaboom";
 
@@ -30,4 +32,8 @@ export const startInteraction = async (
   if (player.direction === Directions.DOWN) {
     playAnimIfNotPlaying(oldman, animationKeys.oldman.up);
   }
+
+  const responses = oldmanLines.english;
+
+  dialog(engine, engine.vec2(200, 500), responses[0]);
 };

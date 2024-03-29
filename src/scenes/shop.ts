@@ -1,6 +1,11 @@
 import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, animationKeys, config, sounds, tags } from "@common";
-import { generateOldman, generatePlayer, setPlayerInstance, startInteraction } from "@entities";
-import { GameObject, HouseEntities, OldmanInstance, PlayerInstance } from "@types";
+import {
+  generatePlayer,
+  generateTrader,
+  setPlayerInstance,
+  startTraderInteraction,
+} from "@entities";
+import { GameObject, PlayerInstance, ShopEntities, TraderInstance } from "@types";
 import {
   colorizeBackground,
   drawBoundaries,
@@ -10,19 +15,19 @@ import {
 } from "@utils";
 import { KaboomCtx } from "kaboom";
 
-const house = async (engine: KaboomCtx) => {
+const shop = async (engine: KaboomCtx) => {
   colorizeBackground(engine, 27, 29, 52);
 
-  const mapData = await fetchMapData(config.houseMapPath);
-  const map = engine.add([engine.pos(480, 200)]);
-  const backgroundMusic = engine.play(sounds.house.background.name, {
+  const mapData = await fetchMapData(config.shopMapPath);
+  const map = engine.add([engine.pos(510, 260)]);
+  const backgroundMusic = engine.play(sounds.shop.background.name, {
     loop: true,
     volume: config.soundVolume,
   });
 
-  const entities: HouseEntities = {
+  const entities: ShopEntities = {
     player: null,
-    oldMan: null,
+    trader: null,
   };
 
   const { layers, tilewidth, tileheight } = mapData;
@@ -42,8 +47,8 @@ const house = async (engine: KaboomCtx) => {
           continue;
         }
 
-        if (object.name === LAYER_OBJECTS.oldman) {
-          entities.oldMan = map.add(generateOldman(engine, engine.vec2(object.x, object.y)));
+        if (object.name === LAYER_OBJECTS.trader) {
+          entities.trader = map.add(generateTrader(engine, engine.vec2(object.x, object.y)));
 
           continue;
         }
@@ -68,13 +73,13 @@ const house = async (engine: KaboomCtx) => {
     engine.go(SCENE_KEYS.world);
   });
 
-  entities.player.onCollide(tags.oldman, (oldman) => {
-    startInteraction(engine, oldman as OldmanInstance, entities.player as PlayerInstance);
+  entities.player.onCollide(tags.trader, (trader) => {
+    startTraderInteraction(trader as TraderInstance, entities.player as PlayerInstance);
   });
 
-  entities.player.onCollideEnd(tags.oldman, (oldman) => {
-    playAnimIfNotPlaying(oldman as GameObject, animationKeys.oldman.down);
+  entities.player.onCollideEnd(tags.trader, (trader) => {
+    playAnimIfNotPlaying(trader as GameObject, animationKeys.trader.down);
   });
 };
 
-export default house;
+export default shop;

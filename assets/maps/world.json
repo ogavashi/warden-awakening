@@ -867,7 +867,7 @@
                  "y":208
                 }, 
                 {
-                 "height":16.25,
+                 "height":10.9772727272727,
                  "id":150,
                  "name":"",
                  "rotation":0,
@@ -875,7 +875,7 @@
                  "visible":true,
                  "width":31.5,
                  "x":592.25,
-                 "y":79.5
+                 "y":80.1363636363636
                 }, 
                 {
                  "height":16,
@@ -887,6 +887,39 @@
                  "width":31.5,
                  "x":416.75,
                  "y":143.625
+                }, 
+                {
+                 "height":3.18181818181817,
+                 "id":152,
+                 "name":"shop-entrance",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":14.4545454545455,
+                 "x":600.727272727273,
+                 "y":91.3636363636364
+                }, 
+                {
+                 "height":3.18181818181819,
+                 "id":153,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8.4545454545455,
+                 "x":615.363636363636,
+                 "y":91.3636363636364
+                }, 
+                {
+                 "height":3.18182,
+                 "id":156,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8.45455,
+                 "x":592.318179545455,
+                 "y":91.40909
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -994,6 +1027,18 @@
                  "width":0,
                  "x":176,
                  "y":80
+                }, 
+                {
+                 "height":0,
+                 "id":157,
+                 "name":"player-shop",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":600.727272727273,
+                 "y":111.727272727273
                 }],
          "offsetx":0,
          "offsety":-16,
@@ -1048,7 +1093,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":152,
+ "nextobjectid":159,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
