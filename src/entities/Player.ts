@@ -1,4 +1,5 @@
 import { animationKeys, config, tags } from "@common";
+import { gameState } from "@state";
 import { Directions, PlayerInstance } from "@types";
 import { multiKeysDown, playAnimIfNotPlaying } from "@utils";
 import { KaboomCtx, Key, Vec2 } from "kaboom";
@@ -56,6 +57,9 @@ const movePlayer = (
 
 export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => {
   engine.onKeyDown((key) => {
+    if (gameState.getFreezePlayer()) {
+      return;
+    }
     //Left movement
     movePlayer(
       engine,

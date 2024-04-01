@@ -1,3 +1,5 @@
+import { Locale } from "@types";
+
 const ukrainian = [
   [
     "А, юний шукач пригод! Моє старе серце радіє, коли бачу, що така відважна душа, як ти, наважується на небезпеки, що підстерігають нас за стінами нашого села",
@@ -63,6 +65,13 @@ const english = [
     "These elixirs can mend even the gravest of wounds, but they come at a cost. Golden coins, gathered from the lifeless husks of the monsters you vanquish, are his currency.",
     "Should you find yourself in dire need of healing, pay him a visit. His wares may just save your life.",
   ],
+  ["Go forth, brave adventurer! Your destiny awaits, and the fate of my son hangs in the balance."],
+  [
+    "Allow me to remind you about the tent near the village's edge.",
+    "Within it dwells a peculiar frog-merchant. He peddles potent healing potions, brewed from the essence of rare herbs.",
+    "These elixirs can mend even the gravest of wounds, but they come at a cost. Golden coins, gathered from the lifeless husks of the monsters you vanquish, are his currency.",
+    "Should you find yourself in dire need of healing, pay him a visit. His wares may just save your life.",
+  ],
   [
     "Ah, back so soon? It seems the trials of the dungeon have not daunted your spirit.",
     "But beware, my friend. The deeper you delve into darkness, the greater the challenges you'll face.",
@@ -88,7 +97,7 @@ const english = [
   ],
 ];
 
-export const oldmanLines = {
-  ukrainian,
+export const oldmanLines: { [key in Locale]: string[][] } = {
   english,
+  ukrainian,
 };

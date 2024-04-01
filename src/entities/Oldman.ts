@@ -1,5 +1,6 @@
 import { animationKeys, config, tags } from "@common";
 import { oldmanLines } from "@content";
+import { gameState, oldmanState } from "@state";
 import { Directions, OldmanInstance, PlayerInstance } from "@types";
 import { dialog } from "@ui";
 import { playAnimIfNotPlaying } from "@utils";
@@ -33,7 +34,19 @@ export const startInteraction = async (
     playAnimIfNotPlaying(oldman, animationKeys.oldman.up);
   }
 
-  const responses = oldmanLines.english;
+  const responses = oldmanLines[gameState.getLocale()];
 
-  dialog(engine, engine.vec2(200, 500), responses[0]);
+  let nbOfTalks = oldmanState.getTalkedNum();
+
+  if (nbOfTalks > responses.length - 2) {
+    oldmanState.setTalkedNum(1);
+    nbOfTalks = oldmanState.getTalkedNum();
+  }
+
+  let response = responses[nbOfTalks];
+
+  if (responses[nbOfTalks]) {
+    await dialog(engine, engine.vec2(200, 500), response);
+    oldmanState.setTalkedNum(nbOfTalks + 1);
+  }
 };

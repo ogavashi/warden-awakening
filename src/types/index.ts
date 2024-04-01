@@ -21,6 +21,11 @@ export enum Directions {
   LEFT = "left",
 }
 
+export enum Locale {
+  ENG = "english",
+  UKR = "ukrainian",
+}
+
 export type GameObject = GameObj<SpriteComp | AreaComp | BodyComp | PosComp | OpacityComp>;
 
 export type PlayerInstance = GameObject &
@@ -59,6 +64,20 @@ export interface HouseEntities {
 export interface ShopEntities {
   trader: GameObject | null;
   player: GameObject | null;
+}
+
+export interface GlobalStateManagerInstance {
+  setFreezePlayer: (val: boolean) => void;
+  getFreezePlayer: () => boolean;
+  setFontSize: (val: number) => void;
+  getFontSize: () => number;
+  setLocale: (val: Locale) => void;
+  getLocale: () => Locale;
+}
+
+export interface OldmanStateManagerInstance {
+  setTalkedNum: (val: number) => void;
+  getTalkedNum: () => number;
 }
 
 export type Tag = keyof typeof tags;
