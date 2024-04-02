@@ -1,6 +1,6 @@
 import { animationKeys, config, tags } from "@common";
 import { oldmanLines } from "@content";
-import { gameState, oldmanState } from "@state";
+import { gameState, oldmanState, playerState } from "@state";
 import { Directions, OldmanInstance, PlayerInstance } from "@types";
 import { dialog } from "@ui";
 import { playAnimIfNotPlaying } from "@utils";
@@ -37,6 +37,11 @@ export const startInteraction = async (
   const responses = oldmanLines[gameState.getLocale()];
 
   let nbOfTalks = oldmanState.getTalkedNum();
+
+  //Give sword after first talk
+  if (!nbOfTalks) {
+    playerState.setHasSword(true);
+  }
 
   if (nbOfTalks > responses.length - 2) {
     oldmanState.setTalkedNum(1);

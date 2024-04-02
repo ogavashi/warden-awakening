@@ -34,6 +34,7 @@ export type PlayerInstance = GameObject &
     attackPower: number;
     direction: Directions;
     isAttacking: boolean;
+    hasCooldown: boolean;
   };
 
 export type SlimeInstance = GameObject &
@@ -78,6 +79,20 @@ export interface GlobalStateManagerInstance {
 export interface OldmanStateManagerInstance {
   setTalkedNum: (val: number) => void;
   getTalkedNum: () => number;
+}
+
+export interface PlayerStateManagerInstance {
+  setHasSword: (val: boolean) => void;
+  getHasSword: () => boolean;
+  setHasShield: (val: boolean) => void;
+  getHasShield: () => boolean;
+  getMaxHealth: () => number;
+  setHealth: (val: number) => void;
+  getHealth: () => number;
+  setHasBossKey: (val: boolean) => void;
+  getHasBossKey: () => boolean;
+  setHasCageKey: (val: boolean) => void;
+  getHasCageKey: () => boolean;
 }
 
 export type Tag = keyof typeof tags;

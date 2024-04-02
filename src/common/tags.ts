@@ -6,4 +6,5 @@ export const tags = {
   doorExit: "door-exit",
   oldman: "oldman",
   trader: "oldman",
+  swordHitBox: "sword-hit-box",
 };

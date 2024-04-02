@@ -17,7 +17,7 @@ const house = async (engine: KaboomCtx) => {
   const map = engine.add([engine.pos(480, 200)]);
   const backgroundMusic = engine.play(sounds.house.background.name, {
     loop: true,
-    volume: config.soundVolume,
+    volume: config.musicVolume,
   });
 
   const entities: HouseEntities = {

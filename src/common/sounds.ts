@@ -17,4 +17,9 @@ export const sounds = {
       name: "house-background",
     },
   },
+  player: {
+    sword: {
+      attack: { path: "./assets/audio/sword-attack.wav", name: "sword-attack" },
+    },
+  },
 };

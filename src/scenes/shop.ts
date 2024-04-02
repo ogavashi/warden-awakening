@@ -22,7 +22,7 @@ const shop = async (engine: KaboomCtx) => {
   const map = engine.add([engine.pos(510, 260)]);
   const backgroundMusic = engine.play(sounds.shop.background.name, {
     loop: true,
-    volume: config.soundVolume,
+    volume: config.musicVolume,
   });
 
   const entities: ShopEntities = {

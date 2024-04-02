@@ -10,4 +10,7 @@ export const loadSounds = (engine: KaboomCtx) => {
 
   //House
   engine.loadSound(sounds.house.background.name, sounds.house.background.path);
+
+  //Player
+  engine.loadSound(sounds.player.sword.attack.name, sounds.player.sword.attack.path);
 };

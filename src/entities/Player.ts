@@ -1,5 +1,5 @@
-import { animationKeys, config, tags } from "@common";
-import { gameState } from "@state";
+import { animationKeys, config, sounds, tags } from "@common";
+import { gameState, playerState } from "@state";
 import { Directions, PlayerInstance } from "@types";
 import { multiKeysDown, playAnimIfNotPlaying } from "@utils";
 import { KaboomCtx, Key, Vec2 } from "kaboom";
@@ -16,6 +16,7 @@ export const generatePlayer = (engine: KaboomCtx, pos: Vec2) => {
       attackPower: 1,
       direction: Directions.DOWN,
       isAttacking: false,
+      hasCooldown: false,
     },
     tags.player,
   ];
@@ -57,7 +58,7 @@ const movePlayer = (
 
 export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => {
   engine.onKeyDown((key) => {
-    if (gameState.getFreezePlayer()) {
+    if (gameState.getFreezePlayer() || player.isAttacking) {
       return;
     }
     //Left movement
@@ -185,7 +186,65 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
     );
   });
 
+  engine.onKeyPress((key) => {
+    if (
+      key !== "space" ||
+      gameState.getFreezePlayer() ||
+      !playerState.getHasSword() ||
+      player.hasCooldown
+    )
+      return;
+
+    const swordSound = engine.play(sounds.player.sword.attack.name, {
+      volume: config.effectsVolums,
+    });
+
+    player.isAttacking = true;
+    player.hasCooldown = true;
+
+    if (!engine.get(tags.swordHitBox).length) {
+      const swordHitBoxPosX = {
+        left: player.worldPos().x - 2,
+        right: player.worldPos().x + 10,
+        up: player.worldPos().x + 5,
+        down: player.worldPos().x + 2,
+      };
+
+      const swordHitBoxPosY = {
+        left: player.worldPos().y + 5,
+        right: player.worldPos().y + 5,
+        up: player.worldPos().y,
+        down: player.worldPos().y + 10,
+      };
+
+      engine.add([
+        engine.area({ shape: new engine.Rect(engine.vec2(0), 8, 8) }),
+        engine.pos(swordHitBoxPosX[player.direction], swordHitBoxPosY[player.direction]),
+        tags.swordHitBox,
+      ]);
+
+      engine.wait(0.5, () => {
+        player.hasCooldown = false;
+        swordSound.stop();
+      });
+
+      engine.wait(0.2, () => {
+        engine.destroyAll(tags.swordHitBox);
+        if (player.direction === Directions.LEFT || player.direction === Directions.RIGHT) {
+          playAnimIfNotPlaying(player, animationKeys.player.side);
+          player.stop();
+
+          return;
+        }
+        playAnimIfNotPlaying(player, animationKeys.player[player.direction]);
+        player.stop();
+      });
+    }
+    playAnimIfNotPlaying(player, animationKeys.player.attack[player.direction]);
+  });
+
   engine.onKeyRelease(() => {
+    player.isAttacking = false;
     player.stop();
   });
 };

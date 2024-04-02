@@ -12,7 +12,7 @@ const world = async (engine: KaboomCtx) => {
 
   const backgroundMusic = engine.play(sounds.world.background.name, {
     loop: true,
-    volume: config.soundVolume,
+    volume: config.musicVolume,
   });
 
   const entities: WorldEntities = {

@@ -23,7 +23,7 @@ export const anims = {
   [animationKeys.player.attack.up]: 1102,
   [animationKeys.player.attack.down]: 1100,
   [animationKeys.player.attack.left]: 1101,
-  [animationKeys.player.attack.down]: 1102,
+  [animationKeys.player.attack.right]: 1101,
   //Slimes
   [animationKeys.slime.idle.down]: 858,
   [animationKeys.slime.down]: { from: 858, to: 859, loop: true },

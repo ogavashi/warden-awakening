@@ -7,7 +7,8 @@ export const config = {
   houseMapPath: "./assets/maps/house.json",
   shopMapPath: "./assets/maps/shop.json",
 
-  soundVolume: 0.05,
+  musicVolume: 0.03,
+  effectsVolums: 0.05,
 
   assetsOptions: {
     sliceX: 39,
