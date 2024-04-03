@@ -39,4 +39,10 @@ export const anims = {
   [animationKeys.trader.down]: 788,
   [animationKeys.trader.side]: 829,
   [animationKeys.trader.up]: 827,
+  //Coin
+  [animationKeys.coin.idle]: {
+    from: 969,
+    to: 974,
+    loop: true,
+  },
 };

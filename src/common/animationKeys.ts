@@ -31,4 +31,7 @@ export const animationKeys = {
     up: "oldman-up",
   },
   trader: { down: "trader-down", side: "trader-side", up: "trader-up" },
+  coin: {
+    idle: "coin-idle",
+  },
 };

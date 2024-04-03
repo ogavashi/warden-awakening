@@ -13,4 +13,10 @@ export const loadSounds = (engine: KaboomCtx) => {
 
   //Player
   engine.loadSound(sounds.player.sword.attack.name, sounds.player.sword.attack.path);
+
+  //Slime
+  engine.loadSound(sounds.slime.defeat.name, sounds.slime.defeat.path);
+
+  //Coin
+  engine.loadSound(sounds.conin.collect.name, sounds.conin.collect.path);
 };

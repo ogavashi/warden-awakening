@@ -22,4 +22,10 @@ export const sounds = {
       attack: { path: "./assets/audio/sword-attack.wav", name: "sword-attack" },
     },
   },
+  slime: {
+    defeat: { path: "./assets/audio/slime-defeat.mp3", name: "slime-defeat" },
+  },
+  conin: {
+    collect: { path: "./assets/audio/coin-collect.mp3", name: "coin-collect" },
+  },
 };

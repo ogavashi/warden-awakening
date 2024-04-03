@@ -6,3 +6,5 @@ export { playAnimIfNotPlaying } from "./playAnimIfNotPlaying";
 export { multiKeysDown } from "./multiKeysDown";
 export { setInstanceMovement } from "./setInstanceMovement";
 export { loadSounds } from "./loadSounds";
+export { blinkEffect } from "./blinkEffect";
+export { defeatEffect } from "./defeatEffect";

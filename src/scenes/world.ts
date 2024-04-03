@@ -1,5 +1,11 @@
 import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, config, sounds, tags } from "@common";
-import { generatePlayer, generateSlime, setPlayerInstance, setSlimeAI } from "@entities";
+import {
+  generatePlayer,
+  generateSlime,
+  setPlayerInstance,
+  setSlimeAI,
+  setSlimeImpact,
+} from "@entities";
 import { PlayerInstance, SlimeInstance, WorldEntities } from "@types";
 import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData } from "@utils";
 import { KaboomCtx } from "kaboom";
@@ -78,6 +84,7 @@ const world = async (engine: KaboomCtx) => {
 
   for (const slime of entities.slimes) {
     setSlimeAI(engine, slime as SlimeInstance);
+    setSlimeImpact(engine, slime as SlimeInstance);
   }
 
   entities.player.onCollide(tags.doorEntrance, () => {

@@ -7,4 +7,5 @@ export const tags = {
   oldman: "oldman",
   trader: "oldman",
   swordHitBox: "sword-hit-box",
+  coin: "coin",
 };

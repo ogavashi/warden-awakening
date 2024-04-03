@@ -3,6 +3,7 @@ import {
   AreaComp,
   BodyComp,
   GameObj,
+  HealthComp,
   KaboomCtx,
   OpacityComp,
   PosComp,
@@ -38,19 +39,27 @@ export type PlayerInstance = GameObject &
   };
 
 export type SlimeInstance = GameObject &
-  StateComp & {
+  StateComp &
+  HealthComp & {
     speed: number;
     attackPower: number;
     prevX: number;
     prevY: number;
     counter: number;
+    waitTime: number;
+    actionTime: number;
+    framesCounter: number;
   };
 
 export type OldmanInstance = GameObject & StateComp;
 
 export type TraderInstance = GameObject & StateComp;
 
+export type CoinInstance = GameObject & StateComp;
+
 export type GameInstance = PlayerInstance | SlimeInstance;
+
+export type GameEntity = SlimeInstance;
 
 export interface WorldEntities {
   player: GameObject | null;
