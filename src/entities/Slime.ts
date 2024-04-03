@@ -120,8 +120,7 @@ export const setSlimeImpact = (engine: KaboomCtx, slime: SlimeInstance) => {
       const coinPos = slime.worldPos();
 
       //destroy with animation
-      slime.waitTime = 5;
-      slime.enterState(INTSANCE_STATES.idle);
+      slime.speed = 0;
       await defeatEffect(engine, slime);
       slime.destroy();
 

@@ -49,6 +49,7 @@ export type SlimeInstance = GameObject &
     waitTime: number;
     actionTime: number;
     framesCounter: number;
+    isDefeated: boolean;
   };
 
 export type OldmanInstance = GameObject & StateComp;
