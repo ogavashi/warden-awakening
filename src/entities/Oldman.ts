@@ -1,8 +1,8 @@
-import { animationKeys, config, tags } from "@common";
-import { oldmanLines } from "@content";
+import { animationKeys, config, sounds, tags } from "@common";
+import { messages, oldmanLines } from "@content";
 import { gameState, oldmanState, playerState } from "@state";
 import { Directions, OldmanInstance, PlayerInstance } from "@types";
-import { dialog } from "@ui";
+import { dialog, toast } from "@ui";
 import { playAnimIfNotPlaying } from "@utils";
 import { KaboomCtx, Vec2 } from "kaboom";
 
@@ -38,11 +38,6 @@ export const startInteraction = async (
 
   let nbOfTalks = oldmanState.getTalkedNum();
 
-  //Give sword after first talk
-  if (!nbOfTalks) {
-    playerState.setHasSword(true);
-  }
-
   if (nbOfTalks > responses.length - 2) {
     oldmanState.setTalkedNum(1);
     nbOfTalks = oldmanState.getTalkedNum();
@@ -52,6 +47,16 @@ export const startInteraction = async (
 
   if (responses[nbOfTalks]) {
     await dialog(engine, engine.vec2(200, 500), response);
+
+    //Give sword after first talk
+    if (!nbOfTalks) {
+      playerState.setHasSword(true);
+      engine.play(sounds.game.item.pickUp.name, {
+        volume: config.effectsVolums,
+      });
+      await toast(engine, messages[gameState.getLocale()].getSword);
+    }
+
     oldmanState.setTalkedNum(nbOfTalks + 1);
   }
 };

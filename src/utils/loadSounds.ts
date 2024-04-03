@@ -19,4 +19,7 @@ export const loadSounds = (engine: KaboomCtx) => {
 
   //Coin
   engine.loadSound(sounds.conin.collect.name, sounds.conin.collect.path);
+
+  //Game
+  engine.loadSound(sounds.game.item.pickUp.name, sounds.game.item.pickUp.path);
 };

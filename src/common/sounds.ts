@@ -28,4 +28,9 @@ export const sounds = {
   conin: {
     collect: { path: "./assets/audio/coin-collect.mp3", name: "coin-collect" },
   },
+  game: {
+    item: {
+      pickUp: { path: "./assets/audio/item-pick-up.mp3", name: "item-pick-up" },
+    },
+  },
 };
