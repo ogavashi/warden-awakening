@@ -115,6 +115,8 @@ export interface PlayerStateManagerInstance {
   getHasBossKey: () => boolean;
   setHasCageKey: (val: boolean) => void;
   getHasCageKey: () => boolean;
+  setCoinsCollected: (val: number) => void;
+  getCoinsCollected: () => number;
 }
 
 export type Tag = keyof typeof tags;

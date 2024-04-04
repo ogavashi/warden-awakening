@@ -6,6 +6,7 @@ const playerStateManager = () => {
   const createInstance = (): PlayerStateManagerInstance => {
     const maxHealth = 3;
 
+    let coinsCollected = 0;
     let hasSword = true;
     let hasShield = false;
     let health = maxHealth;
@@ -26,6 +27,10 @@ const playerStateManager = () => {
         health = val;
       },
       getHealth: () => health,
+      setCoinsCollected: (val) => {
+        coinsCollected = val;
+      },
+      getCoinsCollected: () => coinsCollected,
       setHasBossKey: (val) => {
         hasBossKey = val;
       },

@@ -9,5 +9,6 @@ export const tags = {
   swordHitBox: "sword-hit-box",
   coin: "coin",
   heartsContainer: "hearts-container",
+  coinsContainer: "coins-container",
   enemy: "enemy",
 };

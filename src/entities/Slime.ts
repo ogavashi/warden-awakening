@@ -3,8 +3,6 @@ import { CoinInstance, PlayerInstance, SlimeInstance } from "@types";
 import { blinkEffect, defeatEffect, playAnimIfNotPlaying, setInstanceMovement } from "@utils";
 import { KaboomCtx, Vec2 } from "kaboom";
 import { addCoinAI, generateCoin } from "./Coin";
-import { playerState } from "@state";
-import { healthBar } from "@ui";
 
 const DIRECTIONAL_STATES = [
   INTSANCE_STATES.left,

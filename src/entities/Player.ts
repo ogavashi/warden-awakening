@@ -258,6 +258,7 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
     if (playerState.getHealth() <= 0) {
       engine.go(SCENE_KEYS.house);
       playerState.setHealth(playerState.getMaxHealth());
+      playerState.setCoinsCollected(0);
     }
   });
 };

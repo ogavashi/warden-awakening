@@ -19,4 +19,10 @@ export const spriteAtlas = {
     width: 48,
     height: 48,
   },
+  [animationKeys.coin.static]: {
+    x: 528,
+    y: 384,
+    width: 16,
+    height: 16,
+  },
 };
