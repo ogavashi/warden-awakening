@@ -1,7 +1,8 @@
-import { animationKeys, config, sounds, tags } from "@common";
+import { SCENE_KEYS, animationKeys, config, sounds, tags } from "@common";
 import { gameState, playerState } from "@state";
 import { Directions, PlayerInstance } from "@types";
-import { multiKeysDown, playAnimIfNotPlaying } from "@utils";
+import { healthBar } from "@ui";
+import { blinkEffect, multiKeysDown, playAnimIfNotPlaying } from "@utils";
 import { KaboomCtx, Key, Vec2 } from "kaboom";
 
 export const generatePlayer = (engine: KaboomCtx, pos: Vec2) => {
@@ -246,5 +247,17 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
   engine.onKeyRelease(() => {
     player.isAttacking = false;
     player.stop();
+  });
+
+  player.onCollide(tags.enemy, async (enemy) => {
+    if (player.isAttacking) return;
+    playerState.setHealth(playerState.getHealth() - enemy.attackPower);
+    engine.destroyAll(tags.heartsContainer);
+    healthBar(engine);
+    await blinkEffect(engine, player);
+    if (playerState.getHealth() <= 0) {
+      engine.go(SCENE_KEYS.house);
+      playerState.setHealth(playerState.getMaxHealth());
+    }
   });
 };

@@ -1,6 +1,8 @@
 import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, animationKeys, config, sounds, tags } from "@common";
 import { generateOldman, generatePlayer, setPlayerInstance, startInteraction } from "@entities";
+import { audioState } from "@state";
 import { GameObject, HouseEntities, OldmanInstance, PlayerInstance } from "@types";
+import { healthBar } from "@ui";
 import {
   colorizeBackground,
   drawBoundaries,
@@ -11,11 +13,12 @@ import {
 import { KaboomCtx } from "kaboom";
 
 const house = async (engine: KaboomCtx) => {
+  audioState.stopAll();
   colorizeBackground(engine, 27, 29, 52);
 
   const mapData = await fetchMapData(config.houseMapPath);
   const map = engine.add([engine.pos(480, 200)]);
-  const backgroundMusic = engine.play(sounds.house.background.name, {
+  const backgroundMusic = audioState.playSound(engine, sounds.house.background.name, {
     loop: true,
     volume: config.musicVolume,
   });
@@ -75,6 +78,8 @@ const house = async (engine: KaboomCtx) => {
   entities.player.onCollideEnd(tags.oldman, (oldman) => {
     playAnimIfNotPlaying(oldman as GameObject, animationKeys.oldman.down);
   });
+
+  healthBar(engine);
 };
 
 export default house;

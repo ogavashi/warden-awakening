@@ -8,4 +8,6 @@ export const tags = {
   trader: "oldman",
   swordHitBox: "sword-hit-box",
   coin: "coin",
+  heartsContainer: "hearts-container",
+  enemy: "enemy",
 };

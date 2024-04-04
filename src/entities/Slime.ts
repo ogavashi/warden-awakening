@@ -3,6 +3,8 @@ import { CoinInstance, PlayerInstance, SlimeInstance } from "@types";
 import { blinkEffect, defeatEffect, playAnimIfNotPlaying, setInstanceMovement } from "@utils";
 import { KaboomCtx, Vec2 } from "kaboom";
 import { addCoinAI, generateCoin } from "./Coin";
+import { playerState } from "@state";
+import { healthBar } from "@ui";
 
 const DIRECTIONAL_STATES = [
   INTSANCE_STATES.left,
@@ -16,6 +18,7 @@ const DEFAULT_VALUES = {
   waitTime: 3,
   actionTime: 5,
   framesCounter: 60,
+  attackPower: 0.5,
 };
 
 export const generateSlime = (engine: KaboomCtx, pos: Vec2) => {
@@ -32,13 +35,14 @@ export const generateSlime = (engine: KaboomCtx, pos: Vec2) => {
       speed: DEFAULT_VALUES.speed,
       waitTime: DEFAULT_VALUES.waitTime,
       actionTime: DEFAULT_VALUES.actionTime,
-      attackPower: 0.5,
+      attackPower: DEFAULT_VALUES.attackPower,
       prevX: pos.x,
       prevY: pos.y,
       counter: 0,
       framesCounter: DEFAULT_VALUES.framesCounter,
     },
     tags.slime,
+    tags.enemy,
   ];
 };
 
@@ -134,12 +138,14 @@ export const setSlimeImpact = (engine: KaboomCtx, slime: SlimeInstance) => {
     slime.actionTime = 5;
     slime.waitTime = 0.5;
     slime.framesCounter = 0;
+    slime.attackPower = 1;
 
     engine.wait(10, () => {
       slime.speed = DEFAULT_VALUES.speed;
       slime.actionTime = DEFAULT_VALUES.actionTime;
       slime.waitTime = DEFAULT_VALUES.waitTime;
       slime.framesCounter = DEFAULT_VALUES.framesCounter;
+      slime.attackPower = DEFAULT_VALUES.attackPower;
     });
   });
 };

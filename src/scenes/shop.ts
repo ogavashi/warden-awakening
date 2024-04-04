@@ -5,7 +5,9 @@ import {
   setPlayerInstance,
   startTraderInteraction,
 } from "@entities";
+import { audioState } from "@state";
 import { GameObject, PlayerInstance, ShopEntities, TraderInstance } from "@types";
+import { healthBar } from "@ui";
 import {
   colorizeBackground,
   drawBoundaries,
@@ -16,11 +18,12 @@ import {
 import { KaboomCtx } from "kaboom";
 
 const shop = async (engine: KaboomCtx) => {
+  audioState.stopAll();
   colorizeBackground(engine, 27, 29, 52);
 
   const mapData = await fetchMapData(config.shopMapPath);
   const map = engine.add([engine.pos(510, 260)]);
-  const backgroundMusic = engine.play(sounds.shop.background.name, {
+  const backgroundMusic = audioState.playSound(engine, sounds.shop.background.name, {
     loop: true,
     volume: config.musicVolume,
   });
@@ -80,6 +83,8 @@ const shop = async (engine: KaboomCtx) => {
   entities.player.onCollideEnd(tags.trader, (trader) => {
     playAnimIfNotPlaying(trader as GameObject, animationKeys.trader.down);
   });
+
+  healthBar(engine);
 };
 
 export default shop;

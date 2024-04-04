@@ -34,4 +34,9 @@ export const animationKeys = {
   coin: {
     idle: "coin-idle",
   },
+  heart: {
+    fullHeart: "full-heart",
+    emptyHeart: "empty-heart",
+    halfHeart: "half-heart",
+  },
 };

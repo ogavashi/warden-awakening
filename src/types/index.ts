@@ -1,6 +1,8 @@
 import { tags } from "@common";
 import {
   AreaComp,
+  AudioPlay,
+  AudioPlayOpt,
   BodyComp,
   GameObj,
   HealthComp,
@@ -60,7 +62,7 @@ export type CoinInstance = GameObject & StateComp;
 
 export type GameInstance = PlayerInstance | SlimeInstance;
 
-export type GameEntity = SlimeInstance;
+export type GameEntity = SlimeInstance | PlayerInstance;
 
 export interface WorldEntities {
   player: GameObject | null;
@@ -84,6 +86,16 @@ export interface GlobalStateManagerInstance {
   getFontSize: () => number;
   setLocale: (val: Locale) => void;
   getLocale: () => Locale;
+}
+
+export type ActiveAudio = {
+  [key in string]: AudioPlay;
+};
+
+export interface AudioStateManagerInstance {
+  playSound: (engine: KaboomCtx, soundName: string, options: AudioPlayOpt) => AudioPlay;
+  stopSound: (soundName: string) => void;
+  stopAll: () => void;
 }
 
 export interface OldmanStateManagerInstance {

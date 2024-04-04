@@ -3,12 +3,13 @@ import "./style.css";
 import engine from "./kaboomContext";
 
 import scenes from "@scenes";
-import { config } from "@common";
+import { config, spriteAtlas } from "@common";
 import { loadSounds } from "@utils";
 
 const DEFAULT_SCENE = "world";
 
 engine.loadSprite(config.assetsName, config.assetsPath, config.assetsOptions);
+engine.loadSpriteAtlas(config.assetsPath, spriteAtlas);
 loadSounds(engine);
 
 for (const sceneName in scenes) {

@@ -6,17 +6,20 @@ import {
   setSlimeAI,
   setSlimeImpact,
 } from "@entities";
+import { audioState } from "@state";
 import { PlayerInstance, SlimeInstance, WorldEntities } from "@types";
+import { healthBar } from "@ui";
 import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData } from "@utils";
 import { KaboomCtx } from "kaboom";
 
 const world = async (engine: KaboomCtx) => {
+  audioState.stopAll();
   colorizeBackground(engine, 76, 170, 255);
   const mapData = await fetchMapData(config.worldMapPath);
 
   const map = engine.add([engine.pos(0, 0)]);
 
-  const backgroundMusic = engine.play(sounds.world.background.name, {
+  const backgroundMusic = audioState.playSound(engine, sounds.world.background.name, {
     loop: true,
     volume: config.musicVolume,
   });
@@ -96,6 +99,8 @@ const world = async (engine: KaboomCtx) => {
     backgroundMusic.stop();
     engine.go(SCENE_KEYS.shop);
   });
+
+  healthBar(engine);
 };
 
 export default world;
