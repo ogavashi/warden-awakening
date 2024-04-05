@@ -1,4 +1,4 @@
-import { GlobalStateManagerInstance, Locale } from "@types";
+import { GlobalStateManagerInstance, Locale, PrevScene } from "@types";
 
 const globalStateManager = () => {
   let instance: GlobalStateManagerInstance | null = null;
@@ -7,6 +7,8 @@ const globalStateManager = () => {
     let freezePlayer: boolean = false;
     let fontSize: number = 28;
     let locale: Locale = Locale.ENG;
+    let prevScene: PrevScene = null;
+    let isPuzzleSolved: boolean = false;
 
     return {
       setFreezePlayer: (val: boolean) => {
@@ -21,6 +23,14 @@ const globalStateManager = () => {
         locale = val;
       },
       getLocale: () => locale,
+      setPrevScene: (val: PrevScene) => {
+        prevScene = val;
+      },
+      getPrevScene: () => prevScene,
+      setIsPuzzleSolved: (val: boolean) => {
+        isPuzzleSolved = val;
+      },
+      getIsPuzzleSolved: () => isPuzzleSolved,
     };
   };
 

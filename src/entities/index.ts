@@ -3,3 +3,5 @@ export { generateSlime, setSlimeAI, setSlimeImpact } from "./Slime";
 export { generateOldman, startInteraction } from "./Oldman";
 export { generateTrader, startTraderInteraction } from "./Trader";
 export { generateCoin, addCoinAI } from "./Coin";
+export { generatePressButton, addPressButtonAI } from "./PressButton";
+export { generateBox } from "./Box";

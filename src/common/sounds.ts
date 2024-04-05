@@ -32,5 +32,9 @@ export const sounds = {
     item: {
       pickUp: { path: "./assets/audio/item-pick-up.mp3", name: "item-pick-up" },
     },
+    button: {
+      press: { path: "./assets/audio/button.mp3", name: "button" },
+    },
+    puzzleSolved: { path: "./assets/audio/puzzle-solved.mp3", name: "puzzle-solved" },
   },
 };

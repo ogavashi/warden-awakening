@@ -45,4 +45,7 @@ export const anims = {
     to: 974,
     loop: true,
   },
+  //Button
+  [animationKeys.button.pressed]: 500,
+  [animationKeys.button.unPressed]: 499,
 };

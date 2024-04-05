@@ -8,6 +8,10 @@ export const LAYER_OBJECTS = {
   slime: "slime",
   oldman: "oldman",
   trader: "trader",
+  playerDungeon: "player-dungeon",
+  playerShop: "player-shop",
+  pressButton: "press-button",
+  box: "box",
 };
 
 export const INTSANCE_STATES = {
@@ -22,4 +26,5 @@ export const SCENE_KEYS = {
   world: "world",
   house: "house",
   shop: "shop",
+  dungeon: "dungeon",
 };

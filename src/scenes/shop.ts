@@ -5,8 +5,8 @@ import {
   setPlayerInstance,
   startTraderInteraction,
 } from "@entities";
-import { audioState } from "@state";
-import { GameObject, PlayerInstance, ShopEntities, TraderInstance } from "@types";
+import { audioState, gameState } from "@state";
+import { GameObject, PlayerInstance, PrevScene, ShopEntities, TraderInstance } from "@types";
 import { healthBar } from "@ui";
 import {
   colorizeBackground,
@@ -73,6 +73,7 @@ const shop = async (engine: KaboomCtx) => {
 
   entities.player.onCollide(tags.doorExit, () => {
     backgroundMusic.stop();
+    gameState.setPrevScene(SCENE_KEYS.shop as PrevScene);
     engine.go(SCENE_KEYS.world);
   });
 

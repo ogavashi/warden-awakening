@@ -18,4 +18,4 @@ for (const sceneName in scenes) {
   }
 }
 
-engine.go(DEFAULT_SCENE);
+engine.go("dungeon");

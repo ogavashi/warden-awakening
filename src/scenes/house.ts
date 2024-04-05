@@ -1,7 +1,7 @@
 import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, animationKeys, config, sounds, tags } from "@common";
 import { generateOldman, generatePlayer, setPlayerInstance, startInteraction } from "@entities";
-import { audioState } from "@state";
-import { GameObject, HouseEntities, OldmanInstance, PlayerInstance } from "@types";
+import { audioState, gameState } from "@state";
+import { GameObject, HouseEntities, OldmanInstance, PlayerInstance, PrevScene } from "@types";
 import { healthBar } from "@ui";
 import {
   colorizeBackground,
@@ -68,6 +68,7 @@ const house = async (engine: KaboomCtx) => {
 
   entities.player.onCollide(tags.doorExit, () => {
     backgroundMusic.stop();
+    gameState.setPrevScene(SCENE_KEYS.house as PrevScene);
     engine.go(SCENE_KEYS.world);
   });
 

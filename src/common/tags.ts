@@ -11,4 +11,11 @@ export const tags = {
   heartsContainer: "hearts-container",
   coinsContainer: "coins-container",
   enemy: "enemy",
+  dungeonEnterance: "dungeon-door-entrance",
+  bossExit: "boss-exit",
+  bossEnterance: "boss-entrance",
+  puzzleExit: "puzzle-exit",
+  puzzleEnterance: "puzzle-entrance",
+  pressButton: "press-button",
+  box: "box",
 };

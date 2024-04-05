@@ -6,7 +6,7 @@ import {
   setSlimeAI,
   setSlimeImpact,
 } from "@entities";
-import { audioState } from "@state";
+import { audioState, gameState } from "@state";
 import { PlayerInstance, SlimeInstance, WorldEntities } from "@types";
 import { coinsBar, healthBar } from "@ui";
 import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData } from "@utils";
@@ -40,7 +40,28 @@ const world = async (engine: KaboomCtx) => {
 
     if (layer.name === LAYERS.spawnPoints) {
       for (const object of layer.objects ?? []) {
-        if (object.name === LAYER_OBJECTS.player) {
+        if (
+          object.name === LAYER_OBJECTS.playerDungeon &&
+          gameState.getPrevScene() === SCENE_KEYS.dungeon
+        ) {
+          entities.player = map.add(generatePlayer(engine, engine.vec2(object.x, object.y)));
+
+          continue;
+        }
+
+        if (
+          object.name === LAYER_OBJECTS.playerShop &&
+          gameState.getPrevScene() === SCENE_KEYS.shop
+        ) {
+          entities.player = map.add(generatePlayer(engine, engine.vec2(object.x, object.y)));
+
+          continue;
+        }
+
+        if (
+          object.name === LAYER_OBJECTS.player &&
+          (!gameState.getPrevScene() || gameState.getPrevScene() === SCENE_KEYS.house)
+        ) {
           entities.player = map.add(generatePlayer(engine, engine.vec2(object.x, object.y)));
 
           continue;
@@ -98,6 +119,11 @@ const world = async (engine: KaboomCtx) => {
   entities.player.onCollide(tags.shopEntrance, () => {
     backgroundMusic.stop();
     engine.go(SCENE_KEYS.shop);
+  });
+
+  entities.player.onCollide(tags.dungeonEnterance, () => {
+    backgroundMusic.stop();
+    engine.go(SCENE_KEYS.dungeon);
   });
 
   healthBar(engine);

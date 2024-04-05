@@ -22,4 +22,6 @@ export const loadSounds = (engine: KaboomCtx) => {
 
   //Game
   engine.loadSound(sounds.game.item.pickUp.name, sounds.game.item.pickUp.path);
+  engine.loadSound(sounds.game.button.press.name, sounds.game.button.press.path);
+  engine.loadSound(sounds.game.puzzleSolved.name, sounds.game.puzzleSolved.path);
 };

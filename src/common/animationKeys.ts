@@ -40,4 +40,8 @@ export const animationKeys = {
     emptyHeart: "empty-heart",
     halfHeart: "half-heart",
   },
+  button: {
+    unPressed: "unpressed",
+    pressed: "pressed",
+  },
 };

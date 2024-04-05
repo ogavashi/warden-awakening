@@ -1,4 +1,4 @@
-import { tags } from "@common";
+import { SCENE_KEYS, tags } from "@common";
 import {
   AreaComp,
   AudioPlay,
@@ -60,6 +60,16 @@ export type TraderInstance = GameObject & StateComp;
 
 export type CoinInstance = GameObject & StateComp;
 
+export type PressButtonInstance = GameObject &
+  StateComp & {
+    isButton: boolean;
+  };
+
+export type BoxInstance = GameObject &
+  StateComp & {
+    isPlaced: boolean;
+  };
+
 export type GameInstance = PlayerInstance | SlimeInstance;
 
 export type GameEntity = SlimeInstance | PlayerInstance;
@@ -79,6 +89,15 @@ export interface ShopEntities {
   player: GameObject | null;
 }
 
+export interface DungeonEntities {
+  player: GameObject | null;
+  ghost: GameObject | null;
+  pressButtons: GameObj<SpriteComp | AreaComp | PosComp | OpacityComp>[];
+  boxes: GameObj<SpriteComp | AreaComp | PosComp | OpacityComp>[];
+}
+
+export type PrevScene = keyof typeof SCENE_KEYS | null;
+
 export interface GlobalStateManagerInstance {
   setFreezePlayer: (val: boolean) => void;
   getFreezePlayer: () => boolean;
@@ -86,6 +105,10 @@ export interface GlobalStateManagerInstance {
   getFontSize: () => number;
   setLocale: (val: Locale) => void;
   getLocale: () => Locale;
+  setPrevScene: (val: PrevScene) => void;
+  getPrevScene: () => PrevScene;
+  setIsPuzzleSolved: (val: boolean) => void;
+  getIsPuzzleSolved: () => boolean;
 }
 
 export type ActiveAudio = {

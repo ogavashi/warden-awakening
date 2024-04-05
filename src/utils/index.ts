@@ -8,3 +8,8 @@ export { setInstanceMovement } from "./setInstanceMovement";
 export { loadSounds } from "./loadSounds";
 export { blinkEffect } from "./blinkEffect";
 export { defeatEffect } from "./defeatEffect";
+export { slideCamY } from "./slideCamY";
+export { slideCamX } from "./slideCamX";
+export { slideYMove } from "./slideYMove";
+export { slideXMove } from "./slideXMove";
+export { checkPuzzle } from "./checkPuzzle";

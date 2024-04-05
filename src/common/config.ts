@@ -6,6 +6,7 @@ export const config = {
   worldMapPath: "./assets/maps/world.json",
   houseMapPath: "./assets/maps/house.json",
   shopMapPath: "./assets/maps/shop.json",
+  dungeonMapPath: "./assets/maps/dungeon.json",
 
   musicVolume: 0.03,
   effectsVolums: 0.05,
