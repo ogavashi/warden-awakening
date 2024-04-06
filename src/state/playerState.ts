@@ -10,7 +10,6 @@ const playerStateManager = () => {
     let hasSword = true;
     let hasShield = false;
     let health = maxHealth;
-    let hasBossKey = false;
     let hasCageKey = false;
 
     return {
@@ -31,10 +30,6 @@ const playerStateManager = () => {
         coinsCollected = val;
       },
       getCoinsCollected: () => coinsCollected,
-      setHasBossKey: (val) => {
-        hasBossKey = val;
-      },
-      getHasBossKey: () => hasBossKey,
       setHasCageKey: (val) => {
         hasCageKey = val;
       },

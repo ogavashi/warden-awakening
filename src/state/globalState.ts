@@ -9,6 +9,7 @@ const globalStateManager = () => {
     let locale: Locale = Locale.ENG;
     let prevScene: PrevScene = null;
     let isPuzzleSolved: boolean = false;
+    let isSonSaved: boolean = true;
 
     return {
       setFreezePlayer: (val: boolean) => {
@@ -31,6 +32,10 @@ const globalStateManager = () => {
         isPuzzleSolved = val;
       },
       getIsPuzzleSolved: () => isPuzzleSolved,
+      setIsSonSaved: (val: boolean) => {
+        isSonSaved = val;
+      },
+      getIsSonSaved: () => isSonSaved,
     };
   };
 

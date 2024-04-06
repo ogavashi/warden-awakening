@@ -18,4 +18,6 @@ export const tags = {
   puzzleEnterance: "puzzle-entrance",
   pressButton: "press-button",
   box: "box",
+  prisonDoor: "prison-door",
+  son: "son",
 };

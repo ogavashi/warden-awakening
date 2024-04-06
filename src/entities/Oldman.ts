@@ -45,6 +45,10 @@ export const startInteraction = async (
 
   let response = responses[nbOfTalks];
 
+  if (gameState.getIsSonSaved()) {
+    await dialog(engine, engine.vec2(200, 500), responses[responses.length - 1]);
+  }
+
   if (responses[nbOfTalks]) {
     await dialog(engine, engine.vec2(200, 500), response);
 

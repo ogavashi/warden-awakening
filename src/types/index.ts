@@ -109,6 +109,8 @@ export interface GlobalStateManagerInstance {
   getPrevScene: () => PrevScene;
   setIsPuzzleSolved: (val: boolean) => void;
   getIsPuzzleSolved: () => boolean;
+  setIsSonSaved: (val: boolean) => void;
+  getIsSonSaved: () => boolean;
 }
 
 export type ActiveAudio = {
@@ -134,8 +136,6 @@ export interface PlayerStateManagerInstance {
   getMaxHealth: () => number;
   setHealth: (val: number) => void;
   getHealth: () => number;
-  setHasBossKey: (val: boolean) => void;
-  getHasBossKey: () => boolean;
   setHasCageKey: (val: boolean) => void;
   getHasCageKey: () => boolean;
   setCoinsCollected: (val: number) => void;

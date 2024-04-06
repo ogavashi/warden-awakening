@@ -12,6 +12,8 @@ export const LAYER_OBJECTS = {
   playerShop: "player-shop",
   pressButton: "press-button",
   box: "box",
+  bossDoor: "boss-door",
+  prisonDoor: "prison-door",
 };
 
 export const INTSANCE_STATES = {

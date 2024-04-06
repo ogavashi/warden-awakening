@@ -1,5 +1,5 @@
-import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, config, tags } from "@common";
-import { messages } from "@content";
+import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, config, frameAtlas, tags } from "@common";
+import { messages, sonLines } from "@content";
 import {
   addPressButtonAI,
   generateBox,
@@ -7,9 +7,9 @@ import {
   generatePressButton,
   setPlayerInstance,
 } from "@entities";
-import { audioState, gameState } from "@state";
+import { audioState, gameState, playerState } from "@state";
 import { DungeonEntities, PlayerInstance, PressButtonInstance, PrevScene } from "@types";
-import { coinsBar, healthBar, toast } from "@ui";
+import { coinsBar, dialog, healthBar, toast } from "@ui";
 import {
   colorizeBackground,
   drawBoundaries,
@@ -69,9 +69,37 @@ const dungeon = async (engine: KaboomCtx) => {
           continue;
         }
 
+        //Add boss door
+        if (object.name === LAYER_OBJECTS.bossDoor) {
+          map.add([
+            engine.sprite(config.assetsName, {
+              frame: gameState.getIsPuzzleSolved() ? frameAtlas.door.open : frameAtlas.door.closed,
+            }),
+            engine.area({ shape: new engine.Rect(engine.vec2(0, 0), 16, 16) }),
+            !gameState.getIsPuzzleSolved() && engine.body({ isStatic: true }),
+            engine.pos(object.x, object.y),
+            tags.bossEnterance,
+          ]);
+          continue;
+        }
+
         //Add ghost here
 
         //Add prision door
+        if (object.name === LAYER_OBJECTS.prisonDoor) {
+          map.add([
+            engine.sprite(config.assetsName, {
+              frame: playerState.getHasCageKey()
+                ? frameAtlas.cageDoor.open
+                : frameAtlas.cageDoor.closed,
+            }),
+            !playerState.getHasCageKey() && engine.area(),
+            !playerState.getHasCageKey() && engine.body({ isStatic: true }),
+            engine.pos(object.x, object.y),
+            tags.prisonDoor,
+          ]);
+          continue;
+        }
       }
 
       continue;
@@ -118,6 +146,25 @@ const dungeon = async (engine: KaboomCtx) => {
 
   entities.player.onCollide(tags.puzzleExit, async () => {
     slideXMove(entities.player as PlayerInstance, slideCamX(engine, -325, 1), -40);
+  });
+
+  entities.player.onCollide(tags.prisonDoor, async (prisonDoor) => {
+    await dialog(
+      engine,
+      engine.vec2(200, 500),
+      sonLines[gameState.getLocale()][playerState.getHasCageKey() ? 1 : 0]
+    );
+
+    if (playerState.getHasCageKey()) {
+      prisonDoor.frame = frameAtlas.cageDoor.open;
+      prisonDoor.unuse("body");
+      prisonDoor.unuse("area");
+      gameState.setIsSonSaved(true);
+    }
+  });
+
+  entities.player.onCollide(tags.son, async () => {
+    await dialog(engine, engine.vec2(200, 500), sonLines[gameState.getLocale()][2]);
   });
 
   healthBar(engine);
