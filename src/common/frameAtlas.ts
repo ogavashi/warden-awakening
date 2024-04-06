@@ -7,4 +7,7 @@ export const frameAtlas = {
     open: 506,
     closed: 505,
   },
+  key: {
+    cage: 99,
+  },
 };

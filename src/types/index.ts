@@ -11,6 +11,7 @@ import {
   PosComp,
   SpriteComp,
   StateComp,
+  Vec2,
 } from "kaboom";
 
 export interface Scenes {
@@ -60,6 +61,16 @@ export type TraderInstance = GameObject & StateComp;
 
 export type CoinInstance = GameObject & StateComp;
 
+export type GhostInstance = GameObject &
+  HealthComp &
+  StateComp & {
+    isAttacking: boolean;
+    attackPower: number;
+    prevPos: Vec2;
+    isWaiting: boolean;
+    isDefeated: boolean;
+  };
+
 export type PressButtonInstance = GameObject &
   StateComp & {
     isButton: boolean;
@@ -72,7 +83,7 @@ export type BoxInstance = GameObject &
 
 export type GameInstance = PlayerInstance | SlimeInstance;
 
-export type GameEntity = SlimeInstance | PlayerInstance;
+export type GameEntity = SlimeInstance | PlayerInstance | GhostInstance;
 
 export interface WorldEntities {
   player: GameObject | null;

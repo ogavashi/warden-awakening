@@ -7,7 +7,7 @@ const playerStateManager = () => {
     const maxHealth = 3;
 
     let coinsCollected = 0;
-    let hasSword = true;
+    let hasSword = false;
     let hasShield = false;
     let health = maxHealth;
     let hasCageKey = false;

@@ -37,4 +37,24 @@ export const sounds = {
     },
     puzzleSolved: { path: "./assets/audio/puzzle-solved.mp3", name: "puzzle-solved" },
   },
+  ghost: {
+    attack: {
+      path: "./assets/audio/ghost-attack.mp3",
+      name: "ghost-attack",
+    },
+    background: {
+      path: "./assets/audio/boss-background.mp3",
+      name: "boss-background",
+    },
+  },
+  dungeon: {
+    background: {
+      path: "./assets/audio/dungeon-background.mp3",
+      name: "dungeon-background",
+    },
+  },
+  menu: {
+    path: "./assets/audio/menu.mp3",
+    name: "menu",
+  },
 };

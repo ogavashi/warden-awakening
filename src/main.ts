@@ -3,10 +3,10 @@ import "./style.css";
 import engine from "./kaboomContext";
 
 import scenes from "@scenes";
-import { config, spriteAtlas } from "@common";
+import { SCENE_KEYS, config, spriteAtlas } from "@common";
 import { loadSounds } from "@utils";
 
-const DEFAULT_SCENE = "world";
+const DEFAULT_SCENE = SCENE_KEYS.menu;
 
 engine.loadSprite(config.assetsName, config.assetsPath, config.assetsOptions);
 engine.loadSpriteAtlas(config.assetsPath, spriteAtlas);
@@ -18,4 +18,4 @@ for (const sceneName in scenes) {
   }
 }
 
-engine.go("dungeon");
+engine.go(DEFAULT_SCENE);

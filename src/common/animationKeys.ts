@@ -44,4 +44,8 @@ export const animationKeys = {
     unPressed: "unpressed",
     pressed: "pressed",
   },
+  ghost: {
+    down: "ghost-down",
+    attack: "ghost-attack",
+  },
 };

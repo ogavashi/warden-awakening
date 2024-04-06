@@ -48,4 +48,10 @@ export const anims = {
   //Button
   [animationKeys.button.pressed]: 500,
   [animationKeys.button.unPressed]: 499,
+  //Ghost
+  [animationKeys.ghost.down]: {
+    from: 862,
+    to: 863,
+    loop: true,
+  },
 };

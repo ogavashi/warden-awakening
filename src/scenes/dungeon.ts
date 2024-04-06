@@ -1,14 +1,24 @@
-import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, config, frameAtlas, tags } from "@common";
+import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, config, frameAtlas, sounds, tags } from "@common";
 import { messages, sonLines } from "@content";
 import {
   addPressButtonAI,
   generateBox,
+  generateGhost,
   generatePlayer,
   generatePressButton,
+  onGhostDestroy,
+  setGhostAI,
+  setGhostImpact,
   setPlayerInstance,
 } from "@entities";
 import { audioState, gameState, playerState } from "@state";
-import { DungeonEntities, PlayerInstance, PressButtonInstance, PrevScene } from "@types";
+import {
+  DungeonEntities,
+  GhostInstance,
+  PlayerInstance,
+  PressButtonInstance,
+  PrevScene,
+} from "@types";
 import { coinsBar, dialog, healthBar, toast } from "@ui";
 import {
   colorizeBackground,
@@ -25,6 +35,11 @@ import { KaboomCtx } from "kaboom";
 const dungeon = async (engine: KaboomCtx) => {
   audioState.stopAll();
   colorizeBackground(engine, 27, 29, 52);
+
+  const backgroundMusic = audioState.playSound(engine, sounds.dungeon.background.name, {
+    loop: true,
+    volume: config.musicVolume,
+  });
 
   const mapData = await fetchMapData(config.dungeonMapPath);
   const map = engine.add([engine.pos(420, 95)]);
@@ -84,6 +99,11 @@ const dungeon = async (engine: KaboomCtx) => {
         }
 
         //Add ghost here
+        if (object.name === LAYER_OBJECTS.ghost) {
+          entities.ghost = map.add(generateGhost(engine, engine.vec2(object.x, object.y)));
+
+          continue;
+        }
 
         //Add prision door
         if (object.name === LAYER_OBJECTS.prisonDoor) {
@@ -124,6 +144,7 @@ const dungeon = async (engine: KaboomCtx) => {
   }
 
   entities.player.onCollide(tags.doorExit, () => {
+    backgroundMusic.stop();
     gameState.setPrevScene(SCENE_KEYS.dungeon as PrevScene);
     engine.go(SCENE_KEYS.world);
   });
@@ -133,14 +154,28 @@ const dungeon = async (engine: KaboomCtx) => {
       await toast(engine, messages[gameState.getLocale()].closedDoor);
       return;
     }
+    backgroundMusic.stop();
+    audioState.playSound(engine, sounds.ghost.background.name, {
+      volume: config.musicVolume,
+    });
     slideYMove(entities.player as PlayerInstance, slideCamY(engine, -180, 1), -50);
   });
 
   entities.player.onCollide(tags.bossExit, async () => {
+    if (!playerState.getHasCageKey()) {
+      return;
+    }
     slideYMove(entities.player as PlayerInstance, slideCamY(engine, 180, 1), 50);
+    audioState.stopSound(sounds.ghost.background.name);
   });
 
   entities.player.onCollide(tags.puzzleEnterance, async () => {
+    if (gameState.getIsPuzzleSolved()) {
+      toast(engine, messages[gameState.getLocale()].solvedPuzzle);
+
+      return;
+    }
+
     slideXMove(entities.player as PlayerInstance, slideCamX(engine, 325, 1), 40);
   });
 
@@ -166,6 +201,14 @@ const dungeon = async (engine: KaboomCtx) => {
   entities.player.onCollide(tags.son, async () => {
     await dialog(engine, engine.vec2(200, 500), sonLines[gameState.getLocale()][2]);
   });
+
+  if (!entities.ghost) {
+    return;
+  }
+
+  setGhostAI(engine, entities.ghost as GhostInstance, entities.player as PlayerInstance);
+  setGhostImpact(engine, entities.ghost as GhostInstance);
+  onGhostDestroy(engine);
 
   healthBar(engine);
   coinsBar(engine);

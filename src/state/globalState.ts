@@ -9,7 +9,7 @@ const globalStateManager = () => {
     let locale: Locale = Locale.ENG;
     let prevScene: PrevScene = null;
     let isPuzzleSolved: boolean = false;
-    let isSonSaved: boolean = true;
+    let isSonSaved: boolean = false;
 
     return {
       setFreezePlayer: (val: boolean) => {

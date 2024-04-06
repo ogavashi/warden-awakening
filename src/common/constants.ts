@@ -14,6 +14,7 @@ export const LAYER_OBJECTS = {
   box: "box",
   bossDoor: "boss-door",
   prisonDoor: "prison-door",
+  ghost: "ghost",
 };
 
 export const INTSANCE_STATES = {
@@ -24,7 +25,17 @@ export const INTSANCE_STATES = {
   down: "down",
 };
 
+export const BOSS_STATES = {
+  idle: "idle",
+  right: "right",
+  backtrack: "backtrack",
+  attack: "attack",
+  evade: "evade",
+  standby: "stand-by",
+};
+
 export const SCENE_KEYS = {
+  menu: "mainMenu",
   world: "world",
   house: "house",
   shop: "shop",

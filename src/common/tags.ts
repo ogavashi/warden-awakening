@@ -20,4 +20,6 @@ export const tags = {
   box: "box",
   prisonDoor: "prison-door",
   son: "son",
+  ghost: "ghost",
+  prisonKey: "prison-key",
 };
