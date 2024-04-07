@@ -13,3 +13,4 @@ export { slideCamX } from "./slideCamX";
 export { slideYMove } from "./slideYMove";
 export { slideXMove } from "./slideXMove";
 export { checkPuzzle } from "./checkPuzzle";
+export { handlePlayerTradeItems } from "./handlePlayerTradeItems";

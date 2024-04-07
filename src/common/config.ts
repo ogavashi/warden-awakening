@@ -8,7 +8,7 @@ export const config = {
   shopMapPath: "./assets/maps/shop.json",
   dungeonMapPath: "./assets/maps/dungeon.json",
 
-  musicVolume: 0.03,
+  musicVolume: 0.05,
   effectsVolums: 0.05,
 
   assetsOptions: {

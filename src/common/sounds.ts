@@ -4,6 +4,10 @@ export const sounds = {
       path: "./assets/audio/shop-background.mp3",
       name: "shop-background",
     },
+    buy: {
+      path: "./assets/audio/buy.mp3",
+      name: "buy",
+    },
   },
   world: {
     background: {
@@ -61,5 +65,9 @@ export const sounds = {
   menu: {
     path: "./assets/audio/menu.mp3",
     name: "menu",
+  },
+  potion: {
+    crimson: { path: "./assets/audio/crimson.mp3", name: "crimson" },
+    emerald: { path: "./assets/audio/emerald.mp3", name: "emerald" },
   },
 };

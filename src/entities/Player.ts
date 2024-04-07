@@ -1,7 +1,8 @@
 import { SCENE_KEYS, animationKeys, config, sounds, tags } from "@common";
-import { gameState, playerState } from "@state";
+import { shopItems } from "@content";
+import { audioState, gameState, playerState } from "@state";
 import { Directions, PlayerInstance } from "@types";
-import { healthBar } from "@ui";
+import { healthBar, potionsBar } from "@ui";
 import { blinkEffect, multiKeysDown, playAnimIfNotPlaying } from "@utils";
 import { KaboomCtx, Key, Vec2 } from "kaboom";
 
@@ -191,6 +192,54 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
   });
 
   engine.onKeyPress((key) => {
+    if (gameState.getFreezePlayer()) {
+      return;
+    }
+
+    shopItems[gameState.getLocale()].items.forEach((item) => {
+      if (key === item.key) {
+        if (
+          item.id === 1 &&
+          playerState.getCrimsonPotions() &&
+          playerState.getHealth() !== playerState.getMaxHealth()
+        ) {
+          playerState.setCrimsonPotions(playerState.getCrimsonPotions() - 1);
+          playerState.setHealth(playerState.getMaxHealth());
+          audioState.playSound(engine, sounds.potion.crimson.name, {
+            volume: config.effectsVolums,
+          });
+
+          engine.destroyAll(tags.potionsContainer);
+          potionsBar(engine);
+          healthBar(engine);
+
+          return;
+        }
+
+        if (
+          item.id === 2 &&
+          playerState.getEmeraldPotions() &&
+          playerState.getHealth() !== playerState.getMaxHealth() &&
+          playerState.getHealth() + 1 <= playerState.getMaxHealth()
+        ) {
+          playerState.setEmeraldPotions(playerState.getEmeraldPotions() - 1);
+          playerState.setHealth(playerState.getHealth() + 1);
+          audioState.playSound(engine, sounds.potion.emerald.name, {
+            volume: config.effectsVolums,
+          });
+
+          engine.destroyAll(tags.potionsContainer);
+          engine.destroyAll(tags.heartsContainer);
+          potionsBar(engine);
+          healthBar(engine);
+
+          return;
+        }
+      }
+    });
+  });
+
+  engine.onKeyPress((key) => {
     if (
       key !== "space" ||
       gameState.getFreezePlayer() ||
@@ -287,6 +336,7 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
   });
 
   engine.onKeyRelease((key) => {
+    if (key !== "shift" || !playerState.getHasShield()) return;
     if (key === "shift") {
       if (player.direction === Directions.LEFT || player.direction === Directions.RIGHT) {
         playAnimIfNotPlaying(player, animationKeys.player.side);

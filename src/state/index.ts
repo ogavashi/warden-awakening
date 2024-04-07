@@ -1,3 +1,4 @@
+import traderStateManager from "./traderState";
 import AudioStateManager from "./audioState";
 import globalStateManager from "./globalState";
 import oldmanStateManager from "./oldmanState";
@@ -7,3 +8,4 @@ export const gameState = globalStateManager().getInstance();
 export const oldmanState = oldmanStateManager().getInstance();
 export const playerState = playerStateManager().getInstance();
 export const audioState = AudioStateManager().getInstance();
+export const traderState = traderStateManager().getInstance();

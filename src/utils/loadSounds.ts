@@ -4,6 +4,11 @@ import { KaboomCtx } from "kaboom";
 export const loadSounds = (engine: KaboomCtx) => {
   //Shop
   engine.loadSound(sounds.shop.background.name, sounds.shop.background.path);
+  engine.loadSound(sounds.shop.buy.name, sounds.shop.buy.path);
+
+  //Potion
+  engine.loadSound(sounds.potion.emerald.name, sounds.potion.emerald.path);
+  engine.loadSound(sounds.potion.crimson.name, sounds.potion.crimson.path);
 
   //World
   engine.loadSound(sounds.world.background.name, sounds.world.background.path);

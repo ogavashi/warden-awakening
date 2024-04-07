@@ -8,7 +8,7 @@ import {
 } from "@entities";
 import { audioState, gameState } from "@state";
 import { PlayerInstance, SlimeInstance, WorldEntities } from "@types";
-import { coinsBar, healthBar } from "@ui";
+import { coinsBar, healthBar, potionsBar } from "@ui";
 import { colorizeBackground, drawBoundaries, drawTiles, fetchMapData } from "@utils";
 import { KaboomCtx } from "kaboom";
 
@@ -128,6 +128,7 @@ const world = async (engine: KaboomCtx) => {
 
   healthBar(engine);
   coinsBar(engine);
+  potionsBar(engine);
 };
 
 export default world;

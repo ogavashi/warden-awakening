@@ -2,7 +2,7 @@ import { LAYERS, LAYER_OBJECTS, SCENE_KEYS, animationKeys, config, sounds, tags 
 import { generateOldman, generatePlayer, setPlayerInstance, startInteraction } from "@entities";
 import { audioState, gameState } from "@state";
 import { GameObject, HouseEntities, OldmanInstance, PlayerInstance, PrevScene } from "@types";
-import { healthBar } from "@ui";
+import { coinsBar, healthBar, potionsBar } from "@ui";
 import {
   colorizeBackground,
   drawBoundaries,
@@ -81,6 +81,8 @@ const house = async (engine: KaboomCtx) => {
   });
 
   healthBar(engine);
+  coinsBar(engine);
+  potionsBar(engine);
 };
 
 export default house;

@@ -142,6 +142,11 @@ export interface OldmanStateManagerInstance {
   getTalkedNum: () => number;
 }
 
+export interface TraderStateManagerInstance {
+  setTalkedNum: (val: number) => void;
+  getTalkedNum: () => number;
+}
+
 export interface PlayerStateManagerInstance {
   setHasSword: (val: boolean) => void;
   getHasSword: () => boolean;
@@ -154,6 +159,10 @@ export interface PlayerStateManagerInstance {
   getHasCageKey: () => boolean;
   setCoinsCollected: (val: number) => void;
   getCoinsCollected: () => number;
+  setCrimsonPotions: (val: number) => void;
+  getCrimsonPotions: () => number;
+  setEmeraldPotions: (val: number) => void;
+  getEmeraldPotions: () => number;
 }
 
 export type Tag = keyof typeof tags;

@@ -23,4 +23,5 @@ export const tags = {
   son: "son",
   ghost: "ghost",
   prisonKey: "prison-key",
+  potionsContainer: "potions-container",
 };

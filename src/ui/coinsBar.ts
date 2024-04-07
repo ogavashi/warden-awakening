@@ -6,7 +6,7 @@ import { KaboomCtx } from "kaboom";
 export const coinsBar = (engine: KaboomCtx) => {
   const coinsNumber = playerState.getCoinsCollected();
 
-  const coinsContainer = engine.add([engine.pos(1090, 20), engine.fixed(), tags.coinsContainer]);
+  const coinsContainer = engine.add([engine.pos(1070, 20), engine.fixed(), tags.coinsContainer]);
 
   coinsContainer.add([engine.sprite(animationKeys.coin.static), engine.scale(4), engine.pos(0, 0)]);
 

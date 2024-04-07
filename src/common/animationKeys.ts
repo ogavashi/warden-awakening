@@ -54,4 +54,8 @@ export const animationKeys = {
     down: "ghost-down",
     attack: "ghost-attack",
   },
+  potion: {
+    emerald: "emerald-potion",
+    crimson: "emerald-crimson",
+  },
 };

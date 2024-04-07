@@ -52,13 +52,18 @@ export const startInteraction = async (
   if (responses[nbOfTalks]) {
     await dialog(engine, engine.vec2(200, 500), response);
 
-    //Give sword after first talk
+    //Give sword and shield after first talk
     if (!nbOfTalks) {
       playerState.setHasSword(true);
+      playerState.setHasShield(true);
       engine.play(sounds.game.item.pickUp.name, {
         volume: config.effectsVolums,
       });
       await toast(engine, messages[gameState.getLocale()].getSword);
+      engine.play(sounds.game.item.pickUp.name, {
+        volume: config.effectsVolums,
+      });
+      await toast(engine, messages[gameState.getLocale()].getShield);
     }
 
     oldmanState.setTalkedNum(nbOfTalks + 1);

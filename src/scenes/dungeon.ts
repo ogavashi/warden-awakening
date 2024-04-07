@@ -19,7 +19,7 @@ import {
   PressButtonInstance,
   PrevScene,
 } from "@types";
-import { coinsBar, dialog, healthBar, toast } from "@ui";
+import { coinsBar, dialog, healthBar, potionsBar, toast } from "@ui";
 import {
   colorizeBackground,
   drawBoundaries,
@@ -212,6 +212,7 @@ const dungeon = async (engine: KaboomCtx) => {
 
   healthBar(engine);
   coinsBar(engine);
+  potionsBar(engine);
 };
 
 export default dungeon;

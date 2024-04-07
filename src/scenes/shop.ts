@@ -7,7 +7,7 @@ import {
 } from "@entities";
 import { audioState, gameState } from "@state";
 import { GameObject, PlayerInstance, PrevScene, ShopEntities, TraderInstance } from "@types";
-import { healthBar } from "@ui";
+import { coinsBar, healthBar, potionsBar } from "@ui";
 import {
   colorizeBackground,
   drawBoundaries,
@@ -78,7 +78,7 @@ const shop = async (engine: KaboomCtx) => {
   });
 
   entities.player.onCollide(tags.trader, (trader) => {
-    startTraderInteraction(trader as TraderInstance, entities.player as PlayerInstance);
+    startTraderInteraction(engine, trader as TraderInstance, entities.player as PlayerInstance);
   });
 
   entities.player.onCollideEnd(tags.trader, (trader) => {
@@ -86,6 +86,8 @@ const shop = async (engine: KaboomCtx) => {
   });
 
   healthBar(engine);
+  coinsBar(engine);
+  potionsBar(engine);
 };
 
 export default shop;

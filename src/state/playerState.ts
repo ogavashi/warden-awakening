@@ -7,10 +7,12 @@ const playerStateManager = () => {
     const maxHealth = 3;
 
     let coinsCollected = 0;
-    let hasSword = true;
-    let hasShield = true;
+    let hasSword = false;
+    let hasShield = false;
     let health = maxHealth;
     let hasCageKey = false;
+    let crimsonPotions = 0;
+    let emeraldPotions = 0;
 
     return {
       setHasSword: (val) => {
@@ -34,6 +36,14 @@ const playerStateManager = () => {
         hasCageKey = val;
       },
       getHasCageKey: () => hasCageKey,
+      setEmeraldPotions: (val) => {
+        emeraldPotions = val;
+      },
+      getEmeraldPotions: () => emeraldPotions,
+      setCrimsonPotions: (val) => {
+        crimsonPotions = val;
+      },
+      getCrimsonPotions: () => crimsonPotions,
     };
   };
 

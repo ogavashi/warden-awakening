@@ -25,4 +25,16 @@ export const spriteAtlas = {
     width: 16,
     height: 16,
   },
+  [animationKeys.potion.crimson]: {
+    x: 368,
+    y: 48,
+    width: 16,
+    height: 16,
+  },
+  [animationKeys.potion.emerald]: {
+    x: 384,
+    y: 48,
+    width: 16,
+    height: 16,
+  },
 };
