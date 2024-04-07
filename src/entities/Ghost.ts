@@ -4,7 +4,7 @@ import { GhostInstance, PlayerInstance } from "@types";
 import { blinkEffect, defeatEffect } from "@utils";
 import { KaboomCtx, Vec2 } from "kaboom";
 
-const GHOST_HEALTH = 1;
+const GHOST_HEALTH = 10;
 const ATTACK_SPEEDS = [0.3, 0.5, 1];
 
 export const generateGhost = (engine: KaboomCtx, pos: Vec2) => {
