@@ -118,7 +118,7 @@ export const setSlimeImpact = (engine: KaboomCtx, slime: SlimeInstance) => {
       engine.play(sounds.slime.defeat.name, {
         volume: config.effectsVolums,
       });
-
+      slime.attackPower = 0;
       const coinPos = slime.worldPos();
 
       //destroy with animation
@@ -131,6 +131,9 @@ export const setSlimeImpact = (engine: KaboomCtx, slime: SlimeInstance) => {
 
       addCoinAI(engine, coin as CoinInstance);
     }
+
+    slime.attackPower = 0;
+    await engine.wait(1);
 
     slime.speed = 100;
     slime.actionTime = 5;

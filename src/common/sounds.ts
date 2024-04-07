@@ -27,7 +27,7 @@ export const sounds = {
     },
     shield: {
       charged: { path: "./assets/audio/charged.mp3", name: "charged" },
-      attack: { path: "./assets/audio/sword-attack.wav", name: "sword-attack" },
+      block: { path: "./assets/audio/block.mp3", name: "block" },
     },
   },
   slime: {
@@ -54,6 +54,10 @@ export const sounds = {
     background: {
       path: "./assets/audio/boss-background.mp3",
       name: "boss-background",
+    },
+    standby: {
+      path: "./assets/audio/standby.mp3",
+      name: "standby",
     },
   },
   dungeon: {

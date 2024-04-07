@@ -5,7 +5,7 @@ import { blinkEffect, defeatEffect } from "@utils";
 import { KaboomCtx, Vec2 } from "kaboom";
 
 const GHOST_HEALTH = 10;
-const ATTACK_SPEEDS = [0.3, 0.5, 1];
+const ATTACK_SPEEDS = [0.5, 0.7, 1];
 
 export const generateGhost = (engine: KaboomCtx, pos: Vec2) => {
   const ghost = [
@@ -103,7 +103,7 @@ export const setGhostAI = (engine: KaboomCtx, ghost: GhostInstance, player: Play
       return;
     }
     attackCount++;
-    if (attackCount >= 5) {
+    if (attackCount >= 4) {
       ghost.enterState(BOSS_STATES.standby);
     }
     ghost.enterState(BOSS_STATES.attack);
@@ -122,9 +122,12 @@ export const setGhostAI = (engine: KaboomCtx, ghost: GhostInstance, player: Play
   });
 
   const standby = ghost.onStateEnter(BOSS_STATES.standby, async () => {
+    audioState.playSound(engine, sounds.ghost.standby.name, {
+      volume: config.effectsVolums,
+    });
     ghost.isAttacking = false;
     ghost.isWaiting = true;
-    await engine.wait(1.5);
+    await engine.wait(3);
     ghost.isWaiting = false;
     ghost.enterState(BOSS_STATES.attack);
     attackCount = 0;

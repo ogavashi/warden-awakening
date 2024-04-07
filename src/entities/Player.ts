@@ -256,10 +256,12 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
     player.isAttacking = true;
     player.hasCooldown = true;
 
+    const isSided = player.direction === Directions.LEFT || player.direction === Directions.RIGHT;
+
     if (!engine.get(tags.swordHitBox).length) {
       const swordHitBoxPosX = {
         left: player.worldPos().x - 2,
-        right: player.worldPos().x + 10,
+        right: player.worldPos().x + 8,
         up: player.worldPos().x + 5,
         down: player.worldPos().x + 2,
       };
@@ -267,12 +269,12 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
       const swordHitBoxPosY = {
         left: player.worldPos().y + 5,
         right: player.worldPos().y + 5,
-        up: player.worldPos().y,
-        down: player.worldPos().y + 10,
+        up: player.worldPos().y - 2,
+        down: player.worldPos().y + 11,
       };
 
       engine.add([
-        engine.area({ shape: new engine.Rect(engine.vec2(0), 8, 8) }),
+        engine.area({ shape: new engine.Rect(engine.vec2(0), isSided ? 10 : 8, isSided ? 8 : 10) }),
         engine.pos(swordHitBoxPosX[player.direction], swordHitBoxPosY[player.direction]),
         tags.swordHitBox,
       ]);
@@ -362,7 +364,14 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
   });
 
   player.onCollide(tags.enemy, async (enemy) => {
-    if (player.isAttacking || player.isBlocking) return;
+    if (player.isBlocking) {
+      audioState.playSound(engine, sounds.player.shield.block.name, {
+        volume: config.effectsVolums,
+      });
+
+      return;
+    }
+    if (player.isAttacking) return;
     playerState.setHealth(playerState.getHealth() - enemy.attackPower);
     engine.destroyAll(tags.heartsContainer);
     healthBar(engine);
