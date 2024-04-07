@@ -14,6 +14,12 @@ export const animationKeys = {
       left: "player-attack-left",
       right: "player-attack-right",
     },
+    defense: {
+      up: "player-defense-up",
+      down: "player-defense-down",
+      left: "player-defense-left",
+      right: "player-defense-right",
+    },
   },
   slime: {
     idle: {

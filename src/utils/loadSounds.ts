@@ -13,6 +13,7 @@ export const loadSounds = (engine: KaboomCtx) => {
 
   //Player
   engine.loadSound(sounds.player.sword.attack.name, sounds.player.sword.attack.path);
+  engine.loadSound(sounds.player.shield.charged.name, sounds.player.shield.charged.path);
 
   //Slime
   engine.loadSound(sounds.slime.defeat.name, sounds.slime.defeat.path);
@@ -24,6 +25,7 @@ export const loadSounds = (engine: KaboomCtx) => {
   engine.loadSound(sounds.game.item.pickUp.name, sounds.game.item.pickUp.path);
   engine.loadSound(sounds.game.button.press.name, sounds.game.button.press.path);
   engine.loadSound(sounds.game.puzzleSolved.name, sounds.game.puzzleSolved.path);
+  engine.loadSound(sounds.game.gameOver.name, sounds.game.gameOver.path);
 
   //Ghost
   engine.loadSound(sounds.ghost.attack.name, sounds.ghost.attack.path);

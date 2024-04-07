@@ -7,6 +7,7 @@ export const tags = {
   oldman: "oldman",
   trader: "oldman",
   swordHitBox: "sword-hit-box",
+  shieldHitBox: "shield-hit-box",
   coin: "coin",
   heartsContainer: "hearts-container",
   coinsContainer: "coins-container",

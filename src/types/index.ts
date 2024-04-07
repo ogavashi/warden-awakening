@@ -39,6 +39,9 @@ export type PlayerInstance = GameObject &
     direction: Directions;
     isAttacking: boolean;
     hasCooldown: boolean;
+    isBlocking: boolean;
+    hasShieldCooldown: boolean;
+    blockingTime: number;
   };
 
 export type SlimeInstance = GameObject &

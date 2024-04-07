@@ -40,4 +40,5 @@ export const SCENE_KEYS = {
   house: "house",
   shop: "shop",
   dungeon: "dungeon",
+  gameOver: "gameOver",
 };

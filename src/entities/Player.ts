@@ -17,7 +17,10 @@ export const generatePlayer = (engine: KaboomCtx, pos: Vec2) => {
       attackPower: 1,
       direction: Directions.DOWN,
       isAttacking: false,
+      isBlocking: false,
       hasCooldown: false,
+      hasShieldCooldown: false,
+      blockingTime: 0,
     },
     tags.player,
   ];
@@ -59,7 +62,7 @@ const movePlayer = (
 
 export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => {
   engine.onKeyDown((key) => {
-    if (gameState.getFreezePlayer() || player.isAttacking) {
+    if (gameState.getFreezePlayer() || player.isAttacking || player.isBlocking) {
       return;
     }
     //Left movement
@@ -192,7 +195,8 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
       key !== "space" ||
       gameState.getFreezePlayer() ||
       !playerState.getHasSword() ||
-      player.hasCooldown
+      player.hasCooldown ||
+      player.isBlocking
     )
       return;
 
@@ -244,19 +248,79 @@ export const setPlayerInstance = (engine: KaboomCtx, player: PlayerInstance) => 
     playAnimIfNotPlaying(player, animationKeys.player.attack[player.direction]);
   });
 
+  engine.onKeyDown((key) => {
+    if (
+      key !== "shift" ||
+      gameState.getFreezePlayer() ||
+      !playerState.getHasShield() ||
+      player.hasShieldCooldown ||
+      player.isAttacking
+    )
+      return;
+
+    player.isBlocking = true;
+    player.blockingTime += 1;
+
+    if (player.blockingTime > 320) {
+      player.hasShieldCooldown = true;
+      player.isBlocking = false;
+      player.blockingTime = 0;
+
+      if (player.direction === Directions.LEFT || player.direction === Directions.RIGHT) {
+        playAnimIfNotPlaying(player, animationKeys.player.side);
+      } else {
+        playAnimIfNotPlaying(player, animationKeys.player[player.direction]);
+      }
+
+      engine.wait(5, () => {
+        engine.play(sounds.player.shield.charged.name);
+        player.hasShieldCooldown = false;
+      });
+      player.stop();
+
+      return;
+    }
+
+    playAnimIfNotPlaying(player, animationKeys.player.defense[player.direction]);
+
+    return;
+  });
+
+  engine.onKeyRelease((key) => {
+    if (key === "shift") {
+      if (player.direction === Directions.LEFT || player.direction === Directions.RIGHT) {
+        playAnimIfNotPlaying(player, animationKeys.player.side);
+      } else {
+        playAnimIfNotPlaying(player, animationKeys.player[player.direction]);
+      }
+      player.isBlocking = false;
+      player.blockingTime = 0;
+      player.stop();
+      if (!player.hasShieldCooldown) {
+        player.hasShieldCooldown = true;
+        engine.wait(2, () => {
+          player.hasShieldCooldown = false;
+          engine.play(sounds.player.shield.charged.name);
+        });
+      }
+    }
+  });
+
   engine.onKeyRelease(() => {
     player.isAttacking = false;
     player.stop();
   });
 
   player.onCollide(tags.enemy, async (enemy) => {
-    if (player.isAttacking) return;
+    if (player.isAttacking || player.isBlocking) return;
     playerState.setHealth(playerState.getHealth() - enemy.attackPower);
     engine.destroyAll(tags.heartsContainer);
     healthBar(engine);
     await blinkEffect(engine, player);
     if (playerState.getHealth() <= 0) {
-      engine.go(SCENE_KEYS.house);
+      player.opacity = 0;
+      engine.go(SCENE_KEYS.gameOver);
+      player.opacity = 1;
       playerState.setHealth(playerState.getMaxHealth());
       playerState.setCoinsCollected(0);
     }

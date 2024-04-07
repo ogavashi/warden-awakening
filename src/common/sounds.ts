@@ -21,6 +21,10 @@ export const sounds = {
     sword: {
       attack: { path: "./assets/audio/sword-attack.wav", name: "sword-attack" },
     },
+    shield: {
+      charged: { path: "./assets/audio/charged.mp3", name: "charged" },
+      attack: { path: "./assets/audio/sword-attack.wav", name: "sword-attack" },
+    },
   },
   slime: {
     defeat: { path: "./assets/audio/slime-defeat.mp3", name: "slime-defeat" },
@@ -36,6 +40,7 @@ export const sounds = {
       press: { path: "./assets/audio/button.mp3", name: "button" },
     },
     puzzleSolved: { path: "./assets/audio/puzzle-solved.mp3", name: "puzzle-solved" },
+    gameOver: { path: "./assets/audio/game-over.mp3", name: "game-over" },
   },
   ghost: {
     attack: {
